@@ -1,0 +1,38 @@
+<h2>Admin Dashboard</h2>
+
+<h3>Add Employee</h3>
+
+<input [(ngModel)]="newEmployee.name" placeholder="Name">
+<input [(ngModel)]="newEmployee.email" placeholder="Email">
+<input [(ngModel)]="newEmployee.password" placeholder="Password">
+
+<select [(ngModel)]="newEmployee.role_id">
+  <option [value]="2">Manager</option>
+  <option [value]="3">Employee</option>
+</select>
+
+<button (click)="addEmployee()">Add</button>
+
+<hr>
+
+<h3>Employees</h3>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Change Role</th>
+  </tr>
+
+  <tr *ngFor="let emp of employees">
+    <td>{{ emp.name }}</td>
+    <td>{{ emp.email }}</td>
+    <td>{{ emp.role }}</td>
+
+    <td>
+      <button (click)="changeRole(emp, 2)">Manager</button>
+      <button (click)="changeRole(emp, 3)">Employee</button>
+    </td>
+  </tr>
+</table>

@@ -19,19 +19,22 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    this.authService.login(this.email, this.password).subscribe({
-      next: (res: any) => {
-        // Store in sessionStorage
-        sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('user', JSON.stringify(res.user));
-        sessionStorage.setItem('session_id', res.sessionId); 
+  this.authService.login(this.email, this.password).subscribe({
+    next: (res: any) => {
+      sessionStorage.setItem('token', res.token);
+      sessionStorage.setItem('user', JSON.stringify(res.user));
+      sessionStorage.setItem('session_id', res.sessionId);
 
-        // Navigate
+      // ROLE BASED REDIRECT
+      if (res.user.role === 'Admin') {
+        this.router.navigate(['/admin']);
+      } else {
         this.router.navigate(['/dashboard']);
-      },
-      error: (err) => {
-        this.error = err.error.message || 'Login failed';
       }
-    });
-  }
+    },
+    error: (err) => {
+      this.error = err.error.message || 'Login failed';
+    }
+  });
+}
 }

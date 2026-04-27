@@ -46,26 +46,39 @@ export const loginUser = async (email, password) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) throw new Error("Invalid password");
 
-  //  1. DEACTIVATE ALL OLD SESSIONS
+  // 🔥 1. GET ROLE FROM DB (THIS WAS MISSING)
+  const [roleRow] = await pool.query(
+    `SELECT r.name 
+     FROM organization_users ou
+     JOIN roles r ON ou.role_id = r.id
+     WHERE ou.user_id = ?`,
+    [user.id]
+  );
+
+  // Assign role
+  user.role = roleRow[0]?.name || "Employee";
+
+  // 🔥 2. DELETE OLD SESSION (clean)
   await pool.query("DELETE FROM user_sessions WHERE user_id = ?", [user.id]);
-  //  2. CREATE NEW TOKEN
+
+  // 🔥 3. CREATE TOKEN
   const token = jwt.sign(
     { id: user.id, email: user.email },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" },
+    { expiresIn: "1d" }
   );
 
   const sessionId = uuidv4();
 
-  // 3. INSERT NEW SESSION
+  // 🔥 4. INSERT NEW SESSION
   await pool.query(
     `INSERT INTO user_sessions (user_id, token, session_id, is_active, expires_at)
      VALUES (?, ?, ?, TRUE, DATE_ADD(NOW(), INTERVAL 5 MINUTE))`,
-    [user.id, token, sessionId],
+    [user.id, token, sessionId]
   );
 
-  // 4. REMOVE PASSWORD
+  // 🔥 5. REMOVE PASSWORD
   delete user.password;
 
   return { token, user, sessionId };
-};;
+};
