@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
+import pool from "../config/db.js";
 
-export const authMiddleware = (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   try {
     let token;
 
-    // 1. Get token from header
     const authHeader = req.headers.authorization;
 
     if (authHeader && authHeader.startsWith("Bearer ")) {
@@ -12,13 +12,23 @@ export const authMiddleware = (req, res, next) => {
     }
 
     if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+      return res.status(401).json({ message: "No token" });
     }
 
-    // 2. Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // 3. Attach user to request
+    //  Check if token is active in DB
+    const [rows] = await pool.query(
+      "SELECT * FROM user_sessions WHERE user_id = ? AND token = ? AND is_active = TRUE",
+      [decoded.id, token]
+    );
+
+    if (!rows.length) {
+      return res.status(401).json({
+        message: "Session expired. Please login again"
+      });
+    }
+
     req.user = decoded;
 
     next();
