@@ -21,9 +21,9 @@ export class AuthService {
     return this.http.post(`${this.API}/register`, data);
   }
 
-  logout() {
-    sessionStorage.clear();
-  }
+logout() {
+  return this.http.post(`${this.API}/logout`, {});
+}
 
   getToken() {
     return sessionStorage.getItem('token');
@@ -32,4 +32,5 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+  
 }   
