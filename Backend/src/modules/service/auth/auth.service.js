@@ -20,10 +20,38 @@ export const loginUser = async (email, password) => {
   if (!isMatch) throw new Error("Invalid password");
 
   //  deactivate old sessions
+//  Check if session already exists
+const [existing] = await pool.query(
+  "SELECT * FROM user_sessions WHERE user_id = ?",
+  [user.id]
+);
+
+const token = jwt.sign(
+  { id: user.id, email: user.email },
+  process.env.JWT_SECRET,
+  { expiresIn: "1d" }
+);
+
+const sessionId = uuidv4();
+
+if (existing.length > 0) {
+  //  UPDATE SAME ROW
   await pool.query(
-    "UPDATE user_sessions SET is_active = FALSE WHERE user_id = ?",
-    [user.id]
+    `UPDATE user_sessions 
+     SET token = ?, session_id = ?, is_active = TRUE, 
+         expires_at = DATE_ADD(NOW(), INTERVAL 1 DAY),
+         created_at = NOW()
+     WHERE user_id = ?`,
+    [token, sessionId, user.id]
   );
+} else {
+  // INSERT FIRST TIME
+  await pool.query(
+    `INSERT INTO user_sessions (user_id, token, session_id, expires_at)
+     VALUES (?, ?, ?, DATE_ADD(NOW(), INTERVAL 1 DAY))`,
+    [user.id, token, sessionId]
+  );
+
 
   const token = jwt.sign(
     { id: user.id, email: user.email },
@@ -42,4 +70,5 @@ export const loginUser = async (email, password) => {
   delete user.password;
 
   return { token, user };
+}
 };
