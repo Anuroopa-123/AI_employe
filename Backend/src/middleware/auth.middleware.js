@@ -3,39 +3,34 @@ import pool from "../config/db.js";
 
 export const authMiddleware = async (req, res, next) => {
   try {
-    let token;
-
     const authHeader = req.headers.authorization;
 
-    if (authHeader && authHeader.startsWith("Bearer ")) {
-      token = authHeader.split(" ")[1];
-    }
-
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({ message: "No token" });
     }
 
+    const token = authHeader.split(" ")[1];
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    //  Check if token is active in DB
-  const [rows] = await pool.query(
-  `SELECT * FROM user_sessions 
-   WHERE user_id = ? 
-   AND token = ? 
-   AND is_active = TRUE
-   AND expires_at > NOW()`,
-  [decoded.id, token]
-);
+    const [rows] = await pool.query(
+      `SELECT * FROM user_sessions 
+       WHERE user_id = ? 
+       AND token = ? 
+       AND is_active = TRUE
+       AND expires_at > NOW()`,
+      [decoded.id, token]
+    );
 
     if (!rows.length) {
       return res.status(401).json({
-        message: "Session expired. Please login again"
+        message: "Session expired"
       });
     }
 
     req.user = decoded;
-
     next();
+
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
   }

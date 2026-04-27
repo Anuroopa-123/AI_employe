@@ -44,5 +44,5 @@ export const loginUser = async (email, password) => {
   // 4. REMOVE PASSWORD
   delete user.password;
 
-  return { token, user };
+  return { token, user,sessionId };
 };

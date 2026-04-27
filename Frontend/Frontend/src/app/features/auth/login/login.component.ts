@@ -24,6 +24,7 @@ export class LoginComponent {
         // Store in sessionStorage
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('user', JSON.stringify(res.user));
+        sessionStorage.setItem('session_id', res.sessionId); 
 
         // Navigate
         this.router.navigate(['/dashboard']);

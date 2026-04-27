@@ -25,15 +25,20 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const authHeader = req.headers.authorization;
 
-    // DELETE SESSION
+    if (!authHeader) {
+      return res.json({ success: true });
+    }
+
+    const token = authHeader.split(" ")[1];
+
     await pool.query(
       "DELETE FROM user_sessions WHERE token = ?",
       [token]
     );
 
-    res.json({ success: true, message: "Logged out successfully" });
+    res.json({ success: true, message: "Logged out" });
 
   } catch (err) {
     res.status(500).json({ message: err.message });
