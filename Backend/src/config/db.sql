@@ -227,3 +227,15 @@ CREATE TABLE IF NOT EXISTS sales (
   FOREIGN KEY (employee_id) REFERENCES organization_users(id),
   FOREIGN KEY (order_id) REFERENCES orders(id)
 );
+
+CREATE TABLE IF NOT EXISTS user_sessions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  token VARCHAR(500),
+  session_id VARCHAR(255),
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  expires_at DATETIME,
+
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
