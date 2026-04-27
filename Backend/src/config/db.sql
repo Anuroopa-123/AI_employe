@@ -5,6 +5,12 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS roles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) UNIQUE,
+  description VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE IF NOT EXISTS organizations (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,12 +24,13 @@ CREATE TABLE IF NOT EXISTS organization_users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT,
   organization_id INT,
-  role ENUM('Admin','Manager','Employee'),
+  role_id INT,
   designation VARCHAR(100),
   joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   status ENUM('active','inactive'),
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (organization_id) REFERENCES organizations(id)
+  FOREIGN KEY (organization_id) REFERENCES organizations(id),
+  FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 CREATE TABLE IF NOT EXISTS reporting_structure (

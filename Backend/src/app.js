@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import testRoutes from "./modules/routes/test.routes.js";
+import authRoutes from "./modules/routes/auth/auth.routes.js";
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(cookieParser());
    ROUTES
 =========================== */
 app.use("/api", testRoutes);
+app.use("/api/auth", authRoutes);
 
 /* ===========================
    HEALTH CHECK
