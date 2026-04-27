@@ -20,16 +20,12 @@ export const loginUser = async (email, password) => {
   if (!isMatch) throw new Error("Invalid password");
 
   //  1. DEACTIVATE ALL OLD SESSIONS
-  await pool.query(
-    "UPDATE user_sessions SET is_active = FALSE WHERE user_id = ?",
-    [user.id]
-  );
-
+  await pool.query("DELETE FROM user_sessions WHERE user_id = ?", [user.id]);
   //  2. CREATE NEW TOKEN
   const token = jwt.sign(
     { id: user.id, email: user.email },
     process.env.JWT_SECRET,
-    { expiresIn: "1d" }
+    { expiresIn: "1d" },
   );
 
   const sessionId = uuidv4();
@@ -38,11 +34,11 @@ export const loginUser = async (email, password) => {
   await pool.query(
     `INSERT INTO user_sessions (user_id, token, session_id, is_active, expires_at)
      VALUES (?, ?, ?, TRUE, DATE_ADD(NOW(), INTERVAL 5 MINUTE))`,
-    [user.id, token, sessionId]
+    [user.id, token, sessionId],
   );
 
   // 4. REMOVE PASSWORD
   delete user.password;
 
-  return { token, user,sessionId };
-};
+  return { token, user, sessionId };
+};;

@@ -15,16 +15,18 @@ export const authMiddleware = async (req, res, next) => {
 
     const [rows] = await pool.query(
       `SELECT * FROM user_sessions 
-       WHERE user_id = ? 
-       AND token = ? 
-       AND is_active = TRUE
-       AND expires_at > NOW()`,
-      [decoded.id, token]
+   WHERE user_id = ? 
+   AND token = ? 
+   AND expires_at > NOW()`,
+      [decoded.id, token],
     );
 
     if (!rows.length) {
+      // DELETE EXPIRED / INVALID TOKEN
+      await pool.query("DELETE FROM user_sessions WHERE token = ?", [token]);
+
       return res.status(401).json({
-        message: "Session expired"
+        message: "Session expired",
       });
     }
 
