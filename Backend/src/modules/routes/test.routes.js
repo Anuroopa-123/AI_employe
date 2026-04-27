@@ -8,7 +8,7 @@ router.get("/test-db", async (req, res) => {
     const [rows] = await pool.query("SELECT 1");
     res.json({
       success: true,
-      message: "DB working ✅",
+      message: "DB working",
       data: rows
     });
   } catch (err) {
