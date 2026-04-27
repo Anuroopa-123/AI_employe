@@ -21,5 +21,7 @@ export const loginUser = async (email, password) => {
     { expiresIn: "1d" }
   );
 
-  return { token, user };
+  delete user.password;
+
+return { token, user };
 };

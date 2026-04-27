@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import testRoutes from "./modules/routes/test.routes.js";
+import rateLimit from "express-rate-limit";
 import authRoutes from "./modules/routes/auth/auth.routes.js";
 
 const app = express();
@@ -25,6 +26,13 @@ app.use(
     credentials: true,
   })
 );
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 100, // max requests per IP
+  message: "Too many requests, try again later",
+});
+
+app.use(limiter);
 
 /* ===========================
    BODY PARSER
