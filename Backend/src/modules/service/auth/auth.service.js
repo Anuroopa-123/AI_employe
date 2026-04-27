@@ -7,7 +7,34 @@ import { createUser, findUserByEmail } from "../../repository/auth/auth.reposito
 // REGISTER
 export const registerUser = async (name, email, password) => {
   const hashed = await bcrypt.hash(password, 10);
-  return await createUser(name, email, hashed);
+
+  // 1. Create user
+  const result = await createUser(name, email, hashed);
+  const userId = result.insertId;
+
+  // 2. Create organization (for first user)
+  const [orgResult] = await pool.query(
+    "INSERT INTO organizations (name, created_by) VALUES (?, ?)",
+    [`${name}'s Org`, userId]
+  );
+
+  const orgId = orgResult.insertId;
+
+  // 3. Get Admin role
+  const [role] = await pool.query(
+    "SELECT id FROM roles WHERE name = 'Admin'"
+  );
+
+  const roleId = role[0].id;
+
+  // 4. Map user → organization_users
+  await pool.query(
+    `INSERT INTO organization_users (user_id, organization_id, role_id)
+     VALUES (?, ?, ?)`,
+    [userId, orgId, roleId]
+  );
+
+  return true;
 };
 
 // LOGIN

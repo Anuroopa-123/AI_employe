@@ -1,10 +1,21 @@
-<div class="dashboard">
-  <h2>Welcome to Dashboard 🚀</h2>
+<h2>Welcome {{ user?.name }}</h2>
 
-  <div class="card">
-    <p><strong>Name:</strong> {{ user?.name }}</p>
-    <p><strong>Email:</strong> {{ user?.email }}</p>
-  </div>
+<p>Role: {{ user?.role }}</p>
 
-  <button (click)="logout()">Logout</button>
+<!-- Admin -->
+<div *ngIf="user?.role === 'Admin'">
+  <button>Create Organization</button>
+  <button>Manage Users</button>
 </div>
+
+<!-- Manager -->
+<div *ngIf="user?.role === 'Manager'">
+  <button>Assign Task</button>
+</div>
+
+<!-- Employee -->
+<div *ngIf="user?.role === 'Employee'">
+  <button>My Tasks</button>
+</div>
+
+<button (click)="logout()">Logout</button>
