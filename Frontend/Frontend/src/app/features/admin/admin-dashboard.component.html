@@ -1,38 +1,86 @@
-<h2>Admin Dashboard</h2>
+<div class="admin-dashboard">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p class="subtitle">Manage your organization and team members</p>
+  </div>
 
-<h3>Add Employee</h3>
+  <!-- Add Employee Card -->
+  <div class="card add-employee-card">
+    <h2>Add New Employee</h2>
 
-<input [(ngModel)]="newEmployee.name" placeholder="Name">
-<input [(ngModel)]="newEmployee.email" placeholder="Email">
-<input [(ngModel)]="newEmployee.password" placeholder="Password">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input [(ngModel)]="newEmployee.name" placeholder="Enter full name" />
+      </div>
 
-<select [(ngModel)]="newEmployee.role_id">
-  <option [value]="2">Manager</option>
-  <option [value]="3">Employee</option>
-</select>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" [(ngModel)]="newEmployee.email" placeholder="you@company.com" />
+      </div>
 
-<button (click)="addEmployee()">Add</button>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="newEmployee.password" placeholder="••••••••" />
+      </div>
 
-<hr>
+      <div class="form-group">
+        <label>Role</label>
+        <select [(ngModel)]="newEmployee.role_id">
+          <option [value]="2">Manager</option>
+          <option [value]="3">Employee</option>
+        </select>
+      </div>
+    </div>
 
-<h3>Employees</h3>
+    <button class="add-btn" (click)="addEmployee()">
+      <span>Add Employee</span>
+    </button>
+  </div>
 
-<table border="1">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Role</th>
-    <th>Change Role</th>
-  </tr>
+  <!-- Employees List -->
+  <div class="card employees-card">
+    <div class="card-header">
+      <h2>All Employees</h2>
+      <p>{{ employees.length }} team members</p>
+    </div>
 
-  <tr *ngFor="let emp of employees">
-    <td>{{ emp.name }}</td>
-    <td>{{ emp.email }}</td>
-    <td>{{ emp.role }}</td>
-
-    <td>
-      <button (click)="changeRole(emp, 2)">Manager</button>
-      <button (click)="changeRole(emp, 3)">Employee</button>
-    </td>
-  </tr>
-</table>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employees">
+            <td>
+              <div class="employee-name">
+                <div class="avatar">{{ emp.name?.charAt(0) || 'U' }}</div>
+                <span>{{ emp.name }}</span>
+              </div>
+            </td>
+            <td>{{ emp.email }}</td>
+            <td>
+              <span class="role-badge" [class.manager]="emp.role === 'Manager'">
+                {{ emp.role }}
+              </span>
+            </td>
+            <td class="action-cell">
+              <button class="role-btn manager-btn" (click)="changeRole(emp, 2)">
+                Make Manager
+              </button>
+              <button class="role-btn employee-btn" (click)="changeRole(emp, 3)">
+                Make Employee
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
