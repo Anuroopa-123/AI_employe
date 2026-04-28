@@ -1,24 +1,72 @@
+<!-- sidebar.component.html -->
 <div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="logo-icon">📊</span>   <!-- You can keep this or change -->
+      <h2>Performify</h2>
+    </div>
+    <p class="app-subtitle">Performance OS</p>
+  </div>
 
-  <h3>Menu</h3>
+  <div class="nav-section">
+    <h4 class="section-title">{{ user?.role || 'User' }} Portal</h4>
 
-  <!-- ADMIN -->
-  <ng-container *ngIf="user?.role === 'Admin'">
-    <button (click)="navigate('/admin')">Dashboard</button>
-    <button (click)="navigate('/admin/employees')">Employees</button>
-    <button (click)="navigate('/admin/roles')">Roles</button>
-  </ng-container>
+    <!-- ADMIN -->
+    <ng-container *ngIf="user?.role === 'Admin'">
+      <a (click)="navigate('/admin')" class="nav-item">
+        <span class="icon">Home</span>
+        <span>Dashboard</span>
+      </a>
+      <a (click)="navigate('/admin/employees')" class="nav-item">
+        <span class="icon">Users</span>
+        <span>Employees</span>
+      </a>
+      <a (click)="navigate('/admin/roles')" class="nav-item">
+        <span class="icon">Key</span>
+        <span>Roles & Permissions</span>
+      </a>
+    </ng-container>
 
-  <!-- MANAGER -->
-  <ng-container *ngIf="user?.role === 'Manager'">
-    <button (click)="navigate('/manager')">Dashboard</button>
-    <button (click)="navigate('/manager/tasks')">Assign Tasks</button>
-  </ng-container>
+    <!-- MANAGER -->
+    <ng-container *ngIf="user?.role === 'Manager'">
+      <a (click)="navigate('/manager')" class="nav-item">
+        <span class="icon">Chart</span>
+        <span>Dashboard</span>
+      </a>
+      <a (click)="navigate('/manager/tasks')" class="nav-item">
+        <span class="icon">Plus</span>
+        <span>Assign Tasks</span>
+      </a>
+      <a (click)="navigate('/manager/reviews')" class="nav-item">
+        <span class="icon">Star</span>
+        <span>Reviews</span>
+      </a>
+    </ng-container>
 
-  <!-- EMPLOYEE -->
-  <ng-container *ngIf="user?.role === 'Employee'">
-    <button (click)="navigate('/employee')">Dashboard</button>
-    <button (click)="navigate('/employee/tasks')">My Tasks</button>
-  </ng-container>
+    <!-- EMPLOYEE -->
+    <ng-container *ngIf="user?.role === 'Employee'">
+      <a (click)="navigate('/employee')" class="nav-item">
+        <span class="icon">Home</span>
+        <span>Dashboard</span>
+      </a>
+      <a (click)="navigate('/employee/tasks')" class="nav-item">
+        <span class="icon">Tasks</span>
+        <span>My Tasks</span>
+      </a>
+      <a (click)="navigate('/employee/worklogs')" class="nav-item">
+        <span class="icon">Clock</span>
+        <span>Work Logs</span>
+      </a>
+    </ng-container>
+  </div>
 
+  <div class="sidebar-footer">
+    <div class="user-preview">
+      <div class="avatar">{{ user?.name?.charAt(0) || 'U' }}</div>
+      <div>
+        <p class="user-name">{{ user?.name || 'User' }}</p>
+        <p class="user-role">{{ user?.role }}</p>
+      </div>
+    </div>
+  </div>
 </div>
