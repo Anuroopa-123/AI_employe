@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import testRoutes from "./modules/routes/test.routes.js";
 import rateLimit from "express-rate-limit";
 import authRoutes from "./modules/routes/auth/auth.routes.js";
+import orgRoutes from "./modules/routes/organization/org.routes.js";
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use(cookieParser());
 =========================== */
 app.use("/api", testRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/org", orgRoutes);
 
 /* ===========================
    HEALTH CHECK
