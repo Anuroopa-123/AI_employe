@@ -1,21 +1,72 @@
-<h2>Welcome {{ user?.name }}</h2>
+<div class="dashboard-container">
+  <!-- Welcome Hero Section -->
+  <div class="welcome-section">
+    <div class="welcome-card">
+      <div class="avatar-large">
+        {{ user?.name?.charAt(0) || 'U' }}
+      </div>
+      <h1>Welcome back, {{ user?.name || 'User' }}!</h1>
+      <p class="role-badge" [class.admin]="user?.role === 'Admin'" 
+                           [class.manager]="user?.role === 'Manager'"
+                           [class.employee]="user?.role === 'Employee'">
+        {{ user?.role }}
+      </p>
+    </div>
+  </div>
 
-<p>Role: {{ user?.role }}</p>
+  <!-- Quick Actions -->
+  <div class="actions-section">
+    <h2>Quick Actions</h2>
+    
+    <div class="action-cards">
+      
+      <!-- Admin Actions -->
+      <div *ngIf="user?.role === 'Admin'" class="action-card admin-card">
+        <div class="icon-wrapper">
+          <span class="material-icons">business</span>
+        </div>
+        <h3>Create Organization</h3>
+        <p>Setup new company structure</p>
+        <button class="action-btn primary-btn">Create Now</button>
+      </div>
 
-<!-- Admin -->
-<div *ngIf="user?.role === 'Admin'">
-  <button>Create Organization</button>
-  <button>Manage Users</button>
+      <div *ngIf="user?.role === 'Admin'" class="action-card users-card">
+        <div class="icon-wrapper">
+          <span class="material-icons">people</span>
+        </div>
+        <h3>Manage Users</h3>
+        <p>Add, edit & manage team members</p>
+        <button class="action-btn">Go to Users</button>
+      </div>
+
+      <!-- Manager Actions -->
+      <div *ngIf="user?.role === 'Manager'" class="action-card manager-card">
+        <div class="icon-wrapper">
+          <span class="material-icons">assignment_add</span>
+        </div>
+        <h3>Assign Tasks</h3>
+        <p>Delegate work to your team</p>
+        <button class="action-btn primary-btn">Assign Task</button>
+      </div>
+
+      <!-- Employee Actions -->
+      <div *ngIf="user?.role === 'Employee'" class="action-card employee-card">
+        <div class="icon-wrapper">
+          <span class="material-icons">task</span>
+        </div>
+        <h3>My Tasks</h3>
+        <p>View and manage your assigned work</p>
+        <button class="action-btn primary-btn">View My Tasks</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Logout Button -->
+  <div class="logout-section">
+    <button class="logout-btn" (click)="logout()">
+      <span class="material-icons">logout</span>
+      Logout
+    </button>
+  </div>
 </div>
-
-<!-- Manager -->
-<div *ngIf="user?.role === 'Manager'">
-  <button>Assign Task</button>
-</div>
-
-<!-- Employee -->
-<div *ngIf="user?.role === 'Employee'">
-  <button>My Tasks</button>
-</div>
-
-<button (click)="logout()">Logout</button>

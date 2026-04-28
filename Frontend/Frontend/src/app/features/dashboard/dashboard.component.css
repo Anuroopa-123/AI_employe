@@ -1,19 +1,156 @@
-.dashboard {
+/* dashboard.component.css */
+
+.dashboard-container {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.welcome-section {
   text-align: center;
-  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
-.card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 300px;
-  margin: auto;
+.welcome-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  display: inline-block;
+  min-width: 420px;
 }
 
-button {
-  margin-top: 20px;
-  padding: 10px;
-  background: red;
+.avatar-large {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.welcome-card h1 {
+  margin: 0 0 12px 0;
+  font-size: 2.1rem;
+  color: #1e2937;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 8px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-transform: capitalize;
+}
+
+.role-badge.admin    { background: #dbeafe; color: #1e40af; }
+.role-badge.manager  { background: #d1fae5; color: #065f46; }
+.role-badge.employee { background: #fef3c7; color: #92400e; }
+
+/* Quick Actions */
+.actions-section h2 {
+  text-align: center;
+  color: #1e2937;
+  margin-bottom: 30px;
+  font-size: 1.6rem;
+}
+
+.action-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  justify-content: center;
+}
+
+.action-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #3b82f6;
+}
+
+.action-card h3 {
+  margin: 0 0 12px 0;
+  color: #1e2937;
+  font-size: 1.4rem;
+}
+
+.action-card p {
+  color: #64748b;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.action-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Logout */
+.logout-section {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.logout-btn {
+  background: #ef4444;
   color: white;
   border: none;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
 }
