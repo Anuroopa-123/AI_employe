@@ -2,7 +2,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="logo">
-      <span class="logo-icon">📊</span>   <!-- You can keep this or change -->
+      <span class="logo-icon">📊</span>
       <h2>Performify</h2>
     </div>
     <p class="app-subtitle">Performance OS</p>
@@ -14,15 +14,15 @@
     <!-- ADMIN -->
     <ng-container *ngIf="user?.role === 'Admin'">
       <a (click)="navigate('/admin')" class="nav-item">
-        <span class="icon">Home</span>
+        <span class="icon">🏠</span>
         <span>Dashboard</span>
       </a>
       <a (click)="navigate('/admin/employees')" class="nav-item">
-        <span class="icon">Users</span>
+        <span class="icon">👥</span>
         <span>Employees</span>
       </a>
       <a (click)="navigate('/admin/roles')" class="nav-item">
-        <span class="icon">Key</span>
+        <span class="icon">🔑</span>
         <span>Roles & Permissions</span>
       </a>
     </ng-container>
@@ -30,15 +30,15 @@
     <!-- MANAGER -->
     <ng-container *ngIf="user?.role === 'Manager'">
       <a (click)="navigate('/manager')" class="nav-item">
-        <span class="icon">Chart</span>
+        <span class="icon">📊</span>
         <span>Dashboard</span>
       </a>
       <a (click)="navigate('/manager/tasks')" class="nav-item">
-        <span class="icon">Plus</span>
+        <span class="icon">➕</span>
         <span>Assign Tasks</span>
       </a>
       <a (click)="navigate('/manager/reviews')" class="nav-item">
-        <span class="icon">Star</span>
+        <span class="icon">⭐</span>
         <span>Reviews</span>
       </a>
     </ng-container>
@@ -46,15 +46,15 @@
     <!-- EMPLOYEE -->
     <ng-container *ngIf="user?.role === 'Employee'">
       <a (click)="navigate('/employee')" class="nav-item">
-        <span class="icon">Home</span>
+        <span class="icon">🏠</span>
         <span>Dashboard</span>
       </a>
       <a (click)="navigate('/employee/tasks')" class="nav-item">
-        <span class="icon">Tasks</span>
+        <span class="icon">📋</span>
         <span>My Tasks</span>
       </a>
       <a (click)="navigate('/employee/worklogs')" class="nav-item">
-        <span class="icon">Clock</span>
+        <span class="icon">⏱️</span>
         <span>Work Logs</span>
       </a>
     </ng-container>
@@ -64,7 +64,7 @@
     <div class="user-preview">
       <div class="avatar">{{ user?.name?.charAt(0) || 'U' }}</div>
       <div>
-        <p class="user-name">{{ user?.name || 'User' }}</p>
+        <p class="user-name">{{ user?.name }}</p>
         <p class="user-role">{{ user?.role }}</p>
       </div>
     </div>
