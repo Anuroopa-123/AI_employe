@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports:[CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -15,26 +15,39 @@ export class LoginComponent {
   email = '';
   password = '';
   error = '';
+  loading = false;
+  rememberMe = false;
+  showPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
-  this.authService.login(this.email, this.password).subscribe({
-    next: (res: any) => {
-      sessionStorage.setItem('token', res.token);
-      sessionStorage.setItem('user', JSON.stringify(res.user));
-      sessionStorage.setItem('session_id', res.sessionId);
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
-      // ROLE BASED REDIRECT
-      if (res.user.role === 'Admin') {
-        this.router.navigate(['/admin']);
-      } else {
-        this.router.navigate(['/dashboard']);
+  onLogin() {
+    if (!this.email || !this.password) return;
+
+    this.loading = true;
+    this.error = '';
+
+    this.authService.login(this.email, this.password).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        sessionStorage.setItem('token', res.token);
+        sessionStorage.setItem('user', JSON.stringify(res.user));
+        sessionStorage.setItem('session_id', res.sessionId);
+
+        if (res.user.role === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.error = err.error?.message || 'Invalid email or password';
       }
-    },
-    error: (err) => {
-      this.error = err.error.message || 'Login failed';
-    }
-  });
-}
+    });
+  }
 }
