@@ -1,0 +1,24 @@
+<div class="sidebar">
+
+  <h3>Menu</h3>
+
+  <!-- ADMIN -->
+  <ng-container *ngIf="user?.role === 'Admin'">
+    <button (click)="navigate('/admin')">Dashboard</button>
+    <button (click)="navigate('/admin/employees')">Employees</button>
+    <button (click)="navigate('/admin/roles')">Roles</button>
+  </ng-container>
+
+  <!-- MANAGER -->
+  <ng-container *ngIf="user?.role === 'Manager'">
+    <button (click)="navigate('/manager')">Dashboard</button>
+    <button (click)="navigate('/manager/tasks')">Assign Tasks</button>
+  </ng-container>
+
+  <!-- EMPLOYEE -->
+  <ng-container *ngIf="user?.role === 'Employee'">
+    <button (click)="navigate('/employee')">Dashboard</button>
+    <button (click)="navigate('/employee/tasks')">My Tasks</button>
+  </ng-container>
+
+</div>
