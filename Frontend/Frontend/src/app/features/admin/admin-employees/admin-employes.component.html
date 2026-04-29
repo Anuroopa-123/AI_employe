@@ -1,0 +1,56 @@
+<div class="employees-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Employee Management</h1>
+    <p>Manage your team members</p>
+  </div>
+
+  <!-- ADD EMPLOYEE -->
+  <div class="card">
+    <h2>Add Employee</h2>
+
+    <div class="form-grid">
+      <input [(ngModel)]="newEmployee.name" placeholder="Full Name" />
+      <input [(ngModel)]="newEmployee.email" placeholder="Email" />
+      <input type="password" [(ngModel)]="newEmployee.password" placeholder="Password" />
+
+      <select [(ngModel)]="newEmployee.role_id">
+        <option [value]="2">Manager</option>
+        <option [value]="3">Employee</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" (click)="addEmployee()">Add Employee</button>
+  </div>
+
+  <!-- EMPLOYEE LIST -->
+  <div class="card">
+    <h2>All Employees</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.role }}</td>
+
+          <td>
+            <button class="btn-green" (click)="changeRole(emp, 2)">Manager</button>
+            <button class="btn-gray" (click)="changeRole(emp, 3)">Employee</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

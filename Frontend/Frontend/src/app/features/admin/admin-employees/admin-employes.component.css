@@ -1,0 +1,73 @@
+.employees-page {
+  padding: 20px;
+}
+
+/* HEADER */
+.page-header h1 {
+  margin: 0;
+}
+
+.page-header p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* FORM */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-green {
+  background: #10b981;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+}
+
+.btn-gray {
+  background: #64748b;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
