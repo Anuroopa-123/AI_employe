@@ -16,27 +16,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     cloned = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
-        'x-session-id': sessionId || ''   //  send session id
+        'x-session-id': sessionId || ''
       }
     });
   }
 
   return next(cloned).pipe(
     catchError((err) => {
-     if (err.status === 401) {
-
-  //  prevent multiple alerts
-  if (!sessionStorage.getItem('token')) {
-    return throwError(() => err);
-  }
-
-  sessionStorage.clear();
-
-  //  remove alert here OR comment it
-  // alert("Session expired. Please login again");
-
-  router.navigate(['/login']);
-}
+      if (err.status === 401) {
+        sessionStorage.clear();
+        router.navigate(['/login']);
+      }
       return throwError(() => err);
     })
   );

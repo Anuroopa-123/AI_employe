@@ -7,13 +7,14 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { ManagerComponent } from './features/manager/manager.component';
 import { AdminEmployesComponent } from './features/admin/admin-employees/admin-employes.component';
 import { EmployeeTasksComponent } from './features/employees/employees-task.component';
+import { AssignedTasksComponent } from './features/manager/assigned-tasks/assigned-tasks.component';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-    {
+  {
     path: '',
     component: DashboardLayoutComponent,
     children: [
@@ -21,14 +22,17 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manager', component: ManagerComponent },
       { path: 'manager/tasks', component: ManagerComponent },
-       { path: 'employee', component: DashboardComponent },
+      {
+        path: 'manager/assigned',
+        component: AssignedTasksComponent,
+      },
+      { path: 'employee', component: DashboardComponent },
 
-{
-  path: 'employee/tasks',
-  component: EmployeeTasksComponent
-},
-  { path: 'admin-employes', component: AdminEmployesComponent },
-    ]
-  }
-
+      {
+        path: 'employee/tasks',
+        component: EmployeeTasksComponent,
+      },
+      { path: 'admin-employes', component: AdminEmployesComponent },
+    ],
+  },
 ];

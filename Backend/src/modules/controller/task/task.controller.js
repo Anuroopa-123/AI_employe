@@ -1,9 +1,11 @@
-import { createTask, getTasksForEmployee } 
+import { createTask, getTasksForEmployee, getTasksByManager  } 
 from "../../service/task/task.service.js";
 
 export const assignTask = async (req, res) => {
   try {
-    const managerId = req.user.orgUserId; // from middleware
+    const managerId = req.user.orgUserId; 
+    
+    console.log("Manager ID:", managerId); // from middleware
 
     await createTask({
       ...req.body,
@@ -21,6 +23,17 @@ export const getMyTasks = async (req, res) => {
     const employeeId = req.user.orgUserId;
 
     const tasks = await getTasksForEmployee(employeeId);
+
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+export const getAssignedTasks = async (req, res) => {
+  try {
+    const managerId = req.user.orgUserId;
+
+    const tasks = await getTasksByManager(managerId);
 
     res.json(tasks);
   } catch (err) {
