@@ -35,3 +35,18 @@ export const getTasksByManager = async (managerId) => {
 
   return rows;
 };
+
+export const updateTask = async (taskId, data) => {
+  const { title, description, assigned_to, deadline } = data;
+
+  await pool.query(
+    `UPDATE tasks 
+     SET title = ?, description = ?, assigned_to = ?, deadline = ?
+     WHERE id = ?`,
+    [title, description, assigned_to, deadline, taskId]
+  );
+};
+
+export const deleteTask = async (taskId) => {
+  await pool.query(`DELETE FROM tasks WHERE id = ?`, [taskId]);
+};

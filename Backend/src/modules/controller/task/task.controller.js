@@ -1,4 +1,4 @@
-import { createTask, getTasksForEmployee, getTasksByManager  } 
+import { createTask, getTasksForEmployee, getTasksByManager,updateTask, deleteTask } 
 from "../../service/task/task.service.js";
 
 export const assignTask = async (req, res) => {
@@ -36,6 +36,33 @@ export const getAssignedTasks = async (req, res) => {
     const tasks = await getTasksByManager(managerId);
 
     res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+// UPDATE
+export const editTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await updateTask(id, req.body);
+
+    res.json({ success: true, message: "Task updated" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// DELETE
+export const removeTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await deleteTask(id);
+
+    res.json({ success: true, message: "Task deleted" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
