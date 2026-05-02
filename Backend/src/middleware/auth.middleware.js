@@ -32,11 +32,10 @@ export const authMiddleware = async (req, res, next) => {
     }
 
     //  3. GET ORGANIZATION USER ID 
-    const [orgUser] = await pool.query(
-      "SELECT id FROM organization_users WHERE user_id = ?",
-      [decoded.id]
-    );
-
+ const [orgUser] = await pool.query(
+  "SELECT id, organization_id FROM organization_users WHERE user_id = ?",
+  [decoded.id]
+);
     if (!orgUser.length) {
       return res.status(401).json({
         message: "Org user not found",
@@ -46,6 +45,7 @@ export const authMiddleware = async (req, res, next) => {
     //  4. ATTACH EVERYTHING TO REQUEST
     req.user = decoded;
     req.user.orgUserId = orgUser[0].id;
+    req.user.organizationId = orgUser[0].organization_id;
 
     // (optional but useful)
     req.sessionData = rows[0];

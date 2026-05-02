@@ -24,4 +24,7 @@ export class OrganizationService {
   getAssignedTasks() {
   return this.http.get('http://localhost:5000/api/tasks/assigned');
 }
+getAdminStats() {
+  return this.http.get('http://localhost:5000/api/admin/stats');
+}
 }

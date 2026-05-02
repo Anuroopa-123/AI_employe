@@ -1,54 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule, } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-
+import Chart from 'chart.js/auto';
 import { OrganizationService } from '../../services/organization.service';
+
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [FormsModule, CommonModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
 
-  employees: any[] = [];
+  stats = {
+  totalEmployees: 0,
+  totalManagers: 0,
+  totalTasks: 0,
+  urgentTasks: 0
+};
+  topEmployees: any[] = [];
+  topManagers: any[] = [];
 
-  newEmployee = {
-    name: '',
-    email: '',
-    password: '',
-    role_id: 3
-  };
-
-constructor(private orgService: OrganizationService) {}
+  constructor(private http: HttpClient,private orgService: OrganizationService, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.loadEmployees();
+    this.loadStats();
   }
 
-loadEmployees() {
-  this.orgService.getEmployees()
+
+loadStats() {
+  this.orgService.getAdminStats()
     .subscribe((res: any) => {
-      this.employees = res;
+      //  console.log("STATS RESPONSE:", res);
+      this.stats = res;
+      this.topEmployees = res.topEmployees;
+      this.topManagers = res.topManagers;
+      this.cd.detectChanges(); 
+
+      setTimeout(() => this.renderCharts(), 0);
     });
 }
 
-addEmployee() {
-  this.orgService.addEmployee(this.newEmployee)
-    .subscribe(() => {
-      alert("Employee added");
-      this.loadEmployees();
-    });
-}
+  renderCharts() {
 
-changeRole(emp: any, roleId: number) {
-  this.orgService.updateRole({
-    user_id: emp.id,
-    role_id: roleId
-  }).subscribe(() => {
-    this.loadEmployees();
-  });
-}
+    new Chart("employeeChart", {
+      type: 'pie',
+      data: {
+        labels: this.topEmployees.map(e => e.name),
+        datasets: [{
+          data: this.topEmployees.map(e => e.completed)
+        }]
+      }
+    });
+
+    new Chart("managerChart", {
+      type: 'bar',
+      data: {
+        labels: this.topManagers.map(m => m.name),
+        datasets: [{
+          label: 'Tasks Assigned',
+          data: this.topManagers.map(m => m.assigned)
+        }]
+      }
+    });
+  }
 }
