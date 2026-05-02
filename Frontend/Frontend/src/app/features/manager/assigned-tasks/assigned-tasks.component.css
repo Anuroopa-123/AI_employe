@@ -38,3 +38,6 @@ th {
   border-radius: 10px;
   width: 400px;
 }
+.pending { color: orange; }
+.progress { color: blue; }
+.done { color: green; font-weight: bold; }

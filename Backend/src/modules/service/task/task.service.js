@@ -39,6 +39,14 @@ export const getMyTasks = async (req, res) => {
   }
 };
 
+//employee updated task status 
+export const updateTaskStatus = async (taskId, status) => {
+  await pool.query(
+    `UPDATE tasks SET status = ? WHERE id = ?`,
+    [status, taskId]
+  );
+};
+
 export const getTasksByManager = async (managerId) => {
   const [rows] = await pool.query(`
     SELECT 

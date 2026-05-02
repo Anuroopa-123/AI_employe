@@ -21,7 +21,17 @@
     <td>{{ task.employee_code || 'N/A' }}</td>
     <td>{{ task.title }}</td>
     <td>{{ task.description }}</td>
-    <td>{{ task.status }}</td>
+    <!-- <td>{{ task.status }}</td> -->
+     <td>
+  <span 
+    [ngClass]="{
+      'pending': task.status === 'pending',
+      'progress': task.status === 'in_progress',
+      'done': task.status === 'completed'
+    }">
+    {{ task.status }}
+  </span>
+</td>
     <td>{{ task.deadline | date:'shortDate' }}</td>
     <td>
         <button (click)="openEdit(task)">Edit</button>

@@ -20,6 +20,9 @@ export class AuthService {
   register(data: any) {
     return this.http.post(`${this.API}/register`, data);
   }
+  checkRegister() {
+  return this.http.get(`${this.API}/check-register`);
+}
 
 logout() {
   return this.http.post(`${this.API}/logout`, {});

@@ -27,4 +27,17 @@ export class EmployeeTasksComponent implements OnInit {
         this.cd.detectChanges();
       });
   }
+  updateStatus(taskId: number, event: any) {
+  const status = event.target.value;
+
+  this.http.put(
+    `http://localhost:5000/api/tasks/status/${taskId}`,
+    { status }
+  ).subscribe(() => {
+    console.log("Status updated");
+
+    // reload tasks so UI syncs
+    this.loadTasks();
+  });
+}
 }

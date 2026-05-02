@@ -2,10 +2,26 @@
   <h1>My Tasks</h1>
 
   <div *ngFor="let task of tasks" class="task-card">
+
     <h3>{{ task.title }}</h3>
     <p>{{ task.description }}</p>
 
-    <p><strong>Status:</strong> {{ task.status }}</p>
-    <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+    <p>
+      <strong>Status:</strong>
+
+      <!-- STATUS DROPDOWN -->
+      <select 
+        [value]="task.status"
+        (change)="updateStatus(task.id, $event)">
+        
+        <option value="pending">Pending</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+
+    </p>
+
+    <p><strong>Deadline:</strong> {{ task.deadline | date:'shortDate' }}</p>
+
   </div>
 </div>

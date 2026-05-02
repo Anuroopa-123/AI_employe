@@ -6,13 +6,22 @@ import { createUser, findUserByEmail } from "../../repository/auth/auth.reposito
 
 // REGISTER
 export const registerUser = async (name, email, password) => {
+  //  CHECK: if any organization exists
+  const [orgs] = await pool.query(
+    "SELECT COUNT(*) as count FROM organizations"
+  );
+
+  if (orgs[0].count > 0) {
+    throw new Error("Registration disabled. Contact admin.");
+  }
+
   const hashed = await bcrypt.hash(password, 10);
 
   // 1. Create user
   const result = await createUser(name, email, hashed);
   const userId = result.insertId;
 
-  // 2. Create organization (for first user)
+  // 2. Create organization
   const [orgResult] = await pool.query(
     "INSERT INTO organizations (name, created_by) VALUES (?, ?)",
     [`${name}'s Org`, userId]
