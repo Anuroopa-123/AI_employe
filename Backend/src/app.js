@@ -6,6 +6,7 @@ import testRoutes from "./modules/routes/test.routes.js";
 import rateLimit from "express-rate-limit";
 import authRoutes from "./modules/routes/auth/auth.routes.js";
 import orgRoutes from "./modules/routes/organization/org.routes.js";
+import taskRoutes from "./modules/routes/task/task.routes.js";
 
 const app = express();
 
@@ -52,7 +53,7 @@ app.use(cookieParser());
 app.use("/api", testRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/org", orgRoutes);
-
+app.use("/api/tasks", taskRoutes);
 /* ===========================
    HEALTH CHECK
 =========================== */

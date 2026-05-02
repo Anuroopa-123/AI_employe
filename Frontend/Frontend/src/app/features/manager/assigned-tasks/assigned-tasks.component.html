@@ -1,0 +1,53 @@
+<div class="tasks-container">
+
+  <h1>Assigned Tasks</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Emp ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Deadline</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+  <tbody *ngIf="tasks && tasks.length > 0; else noData">
+  <tr *ngFor="let task of tasks">
+    <td>{{ task.employee_name }}</td>
+    <td>{{ task.employee_code || 'N/A' }}</td>
+    <td>{{ task.title }}</td>
+    <td>{{ task.description }}</td>
+    <td>{{ task.status }}</td>
+    <td>{{ task.deadline | date:'shortDate' }}</td>
+    <td>
+        <button (click)="openEdit(task)">Edit</button>
+        <button (click)="deleteTask(task.id)">Delete</button>
+    </td>
+  </tr>
+</tbody>
+
+<ng-template #noData>
+  <tr>
+    <td colspan="5" style="text-align:center;">No tasks found</td>
+  </tr>
+</ng-template>
+  </table>
+  <!-- EDIT MODAL -->
+<div class="modal" *ngIf="showEdit">
+  <div class="modal-content">
+    <h2>Edit Task</h2>
+
+    <input [(ngModel)]="selectedTask.title" placeholder="Title">
+    <textarea [(ngModel)]="selectedTask.description"></textarea>
+    <input type="date" [(ngModel)]="selectedTask.deadline">
+
+    <button (click)="updateTask()">Save</button>
+    <button (click)="closeEdit()">Cancel</button>
+  </div>
+</div>
+
+</div>

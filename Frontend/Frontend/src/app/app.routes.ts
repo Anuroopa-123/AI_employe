@@ -6,21 +6,33 @@ import { AdminDashboardComponent } from './features/admin/admin-dashboard.compon
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { ManagerComponent } from './features/manager/manager.component';
 import { AdminEmployesComponent } from './features/admin/admin-employees/admin-employes.component';
+import { EmployeeTasksComponent } from './features/employees/employees-task.component';
+import { AssignedTasksComponent } from './features/manager/assigned-tasks/assigned-tasks.component';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-    {
+  {
     path: '',
     component: DashboardLayoutComponent,
     children: [
       { path: 'admin', component: AdminDashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manager', component: ManagerComponent },
-      { path: 'admin-employes', component: AdminEmployesComponent }
-    ]
-  }
+      { path: 'manager/tasks', component: ManagerComponent },
+      {
+        path: 'manager/assigned',
+        component: AssignedTasksComponent,
+      },
+      { path: 'employee', component: DashboardComponent },
 
+      {
+        path: 'employee/tasks',
+        component: EmployeeTasksComponent,
+      },
+      { path: 'admin-employes', component: AdminEmployesComponent },
+    ],
+  },
 ];

@@ -25,14 +25,17 @@ CREATE TABLE IF NOT EXISTS organization_users (
   user_id INT,
   organization_id INT,
   role_id INT,
+
+  employee_code VARCHAR(20) UNIQUE,   
+
   designation VARCHAR(100),
   joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status ENUM('active','inactive'),
+  status ENUM('active','inactive') DEFAULT 'active',
+
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (organization_id) REFERENCES organizations(id),
   FOREIGN KEY (role_id) REFERENCES roles(id)
 );
-
 CREATE TABLE IF NOT EXISTS reporting_structure (
   id INT AUTO_INCREMENT PRIMARY KEY,
   employee_id INT,
