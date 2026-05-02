@@ -12,6 +12,19 @@ export const register = async (req, res) => {
   }
 };
 
+export const checkRegistration = async (req, res) => {
+  try {
+    const [orgs] = await pool.query(
+      "SELECT COUNT(*) as count FROM organizations"
+    );
+
+    res.json({
+      allowRegister: orgs[0].count === 0
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;

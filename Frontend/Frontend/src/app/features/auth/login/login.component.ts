@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';  //  add OnInit
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {   //  implement OnInit
+
   email = '';
   password = '';
   error = '';
@@ -19,7 +20,15 @@ export class LoginComponent {
   rememberMe = false;
   showPassword = false;
 
+  showRegister = false;  //  THIS
+
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {   //  ADD THIS METHOD
+    this.authService.checkRegister().subscribe((res: any) => {
+      this.showRegister = res.allowRegister;
+    });
+  }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
