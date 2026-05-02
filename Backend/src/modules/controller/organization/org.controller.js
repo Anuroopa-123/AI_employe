@@ -5,13 +5,19 @@ import bcrypt from "bcrypt";
 export const getEmployees = async (req, res) => {
   try {
     const [rows] = await pool.query(`
-      SELECT u.id, u.name, u.email, r.name AS role
-      FROM users u
-      JOIN organization_users ou ON u.id = ou.user_id
+      SELECT 
+        u.name, 
+        u.email,
+        ou.id AS org_user_id,
+        r.name AS role
+      FROM organization_users ou
+      JOIN users u ON ou.user_id = u.id
       JOIN roles r ON ou.role_id = r.id
+      WHERE r.name = 'Employee'   -- ✅ ONLY EMPLOYEES
     `);
 
     res.json(rows);
+
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

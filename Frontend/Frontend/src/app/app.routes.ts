@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './features/admin/admin-dashboard.compon
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { ManagerComponent } from './features/manager/manager.component';
 import { AdminEmployesComponent } from './features/admin/admin-employees/admin-employes.component';
+import { EmployeeTasksComponent } from './features/employees/employees-task.component';
 
 
 export const routes: Routes = [
@@ -19,7 +20,14 @@ export const routes: Routes = [
       { path: 'admin', component: AdminDashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manager', component: ManagerComponent },
-      { path: 'admin-employes', component: AdminEmployesComponent }
+      { path: 'manager/tasks', component: ManagerComponent },
+       { path: 'employee', component: DashboardComponent },
+
+{
+  path: 'employee/tasks',
+  component: EmployeeTasksComponent
+},
+  { path: 'admin-employes', component: AdminEmployesComponent },
     ]
   }
 
