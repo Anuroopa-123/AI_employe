@@ -31,7 +31,7 @@ loadTasks() {
 
         this.loading = false;
 
-        this.cd.detectChanges(); // 🔥 FORCE UI UPDATE
+        this.cd.detectChanges(); //  FORCE UI UPDATE
       },
       error: () => {
         this.loading = false;
