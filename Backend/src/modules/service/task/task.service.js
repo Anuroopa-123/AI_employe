@@ -12,12 +12,31 @@ export const createTask = async (task) => {
 };
 
 export const getTasksForEmployee = async (employeeId) => {
-  const [rows] = await pool.query(
-    `SELECT * FROM tasks WHERE assigned_to = ?`,
-    [employeeId]
-  );
+  const [rows] = await pool.query(`
+    SELECT 
+      t.*,
+      u.name AS employee_name,
+      ou.employee_code
+    FROM tasks t
+    JOIN organization_users ou ON t.assigned_to = ou.id
+    JOIN users u ON ou.user_id = u.id
+    WHERE t.assigned_to = ?
+  `, [employeeId]);
 
   return rows;
+};
+export const getMyTasks = async (req, res) => {
+  try {
+    console.log("Logged Employee Org ID:", req.user.orgUserId);
+
+    const employeeId = req.user.orgUserId;
+
+    const tasks = await getTasksForEmployee(employeeId);
+
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const getTasksByManager = async (managerId) => {
