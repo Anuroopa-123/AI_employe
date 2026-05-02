@@ -9,11 +9,12 @@ export const getEmployees = async (req, res) => {
         u.name, 
         u.email,
         ou.id AS org_user_id,
+        ou.employee_code,  
         r.name AS role
       FROM organization_users ou
       JOIN users u ON ou.user_id = u.id
       JOIN roles r ON ou.role_id = r.id
-      WHERE r.name = 'Employee'   -- ✅ ONLY EMPLOYEES
+      WHERE r.name = 'Employee'
     `);
 
     res.json(rows);
@@ -38,14 +39,32 @@ export const addEmployee = async (req, res) => {
 
     const userId = userResult.insertId;
 
-    // 2. assign organization + role
-    await pool.query(
+    // 2. insert into organization_users
+    const [orgResult] = await pool.query(
       `INSERT INTO organization_users (user_id, organization_id, role_id)
-       VALUES (?, 1, ?)`, //  for now org_id = 1
+       VALUES (?, 1, ?)`,
       [userId, role_id]
     );
 
+    const orgUserId = orgResult.insertId; //  IMPORTANT
+
+    // 3. GENERATE EMPLOYEE CODE
+    const [countRows] = await pool.query(
+      "SELECT COUNT(*) as count FROM organization_users"
+    );
+
+    const empNumber = countRows[0].count;
+
+    const employeeCode = `EMP${String(empNumber).padStart(3, '0')}`;
+
+    // 4. UPDATE employee_code
+    await pool.query(
+      "UPDATE organization_users SET employee_code = ? WHERE id = ?",
+      [employeeCode, orgUserId] //  USE id (NOT user_id)
+    );
+
     res.json({ success: true });
+
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

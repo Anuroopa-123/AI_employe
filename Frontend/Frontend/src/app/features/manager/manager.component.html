@@ -11,11 +11,12 @@
 
     <textarea [(ngModel)]="task.description" placeholder="Description"></textarea>
 
-    <!-- ✅ EMPLOYEE DROPDOWN -->
+    <!-- EMPLOYEE DROPDOWN -->
     <select [(ngModel)]="task.assigned_to">
       <option value="">Select Employee</option>
       <option *ngFor="let emp of employees" [value]="emp.org_user_id">
-        {{ emp.name }} ({{ emp.role }})
+        {{ emp.name }} ({{ emp.employee_code }})
+
       </option>
     </select>
 

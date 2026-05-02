@@ -11,10 +11,10 @@ export const authMiddleware = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    // ✅ 1. VERIFY TOKEN
+    //  1. VERIFY TOKEN
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // ✅ 2. CHECK SESSION
+    //  2. CHECK SESSION
     const [rows] = await pool.query(
       `SELECT * FROM user_sessions 
        WHERE user_id = ? 
@@ -31,7 +31,7 @@ export const authMiddleware = async (req, res, next) => {
       });
     }
 
-    // ✅ 3. GET ORGANIZATION USER ID (🔥 THIS IS WHAT YOU ASKED)
+    //  3. GET ORGANIZATION USER ID 
     const [orgUser] = await pool.query(
       "SELECT id FROM organization_users WHERE user_id = ?",
       [decoded.id]
@@ -43,7 +43,7 @@ export const authMiddleware = async (req, res, next) => {
       });
     }
 
-    // ✅ 4. ATTACH EVERYTHING TO REQUEST
+    //  4. ATTACH EVERYTHING TO REQUEST
     req.user = decoded;
     req.user.orgUserId = orgUser[0].id;
 
