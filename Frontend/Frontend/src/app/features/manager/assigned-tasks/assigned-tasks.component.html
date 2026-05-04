@@ -55,8 +55,10 @@
     <textarea [(ngModel)]="selectedTask.description"></textarea>
     <input type="date" [(ngModel)]="selectedTask.deadline">
 
-    <button (click)="updateTask()">Save</button>
-    <button (click)="closeEdit()">Cancel</button>
+ <div class="modal-actions">
+  <button class="save-btn" (click)="updateTask()">Save</button>
+  <button class="cancel-btn" (click)="closeEdit()">Cancel</button>
+</div>
   </div>
 </div>
 

@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-tasks',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './employees-task.component.html',
   styleUrls: ['./employees-task.component.css']
 })
@@ -13,7 +15,7 @@ export class EmployeeTasksComponent implements OnInit {
 
   tasks: any[] = [];
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.loadTasks();
@@ -35,9 +37,61 @@ export class EmployeeTasksComponent implements OnInit {
     { status }
   ).subscribe(() => {
     console.log("Status updated");
+    this.toastr.success('Status updated successfully');
 
     // reload tasks so UI syncs
     this.loadTasks();
   });
+}
+markComplete(taskId: number) {
+  this.http.put(`http://localhost:5000/api/tasks/status/${taskId}`, {
+    status: 'completed'
+  }).subscribe(() => {
+    this.toastr.success('Task marked as completed');
+    this.loadTasks();
+  });
+}
+
+submitWork(task: any) {
+  const formData = new FormData();
+
+  formData.append('task_id', task.id);
+  formData.append('description', task.workLog || '');
+  formData.append('hours_spent', task.hours || 0);
+
+  if (task.selectedFile) {
+    formData.append('file', task.selectedFile);
+  }
+
+  task.uploading = true;
+
+  this.http.post('http://localhost:5000/api/worklogs/add', formData)
+    .subscribe({
+      next: () => {
+        this.toastr.success('Work submitted successfully');
+
+        // RESET UI
+        task.uploading = false;
+        task.workLog = '';
+        task.selectedFile = null;
+        task.hours = null;
+
+        //  FORCE FULL REFRESH
+        this.tasks = [];
+        this.loadTasks();
+      },
+      error: () => {
+        this.toastr.error('Upload failed');
+        task.uploading = false;
+      }
+    });
+}
+
+onFileSelect(event: any, task: any) {
+  const file = event.target.files[0];
+
+  if (!file) return;
+
+  task.selectedFile = file; // store file temporarily
 }
 }

@@ -1,0 +1,67 @@
+<div class="review-container">
+
+  <h2>⭐ Employee Reviews</h2>
+
+  <div *ngFor="let task of tasks" class="review-card">
+
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+
+    <p><b>Employee:</b> {{ task.employee_name }}</p>
+    <p><b>Status:</b> {{ task.status }}</p>
+    <p><b>Approval:</b> {{ task.completion_status }}</p>
+    <a *ngIf="task.attachment_url"
+       [href]="'http://localhost:5000/uploads/' + task.attachment_url"
+       target="_blank">
+       📎 View Employee Work
+    </a>
+
+
+    <!-- Only completed tasks -->
+<div *ngIf="task.status === 'completed'">
+
+  <!-- APPROVED -->
+  <div *ngIf="task.completion_status === 'approved'">
+    <p class="approved">✅ Already Reviewed</p>
+  </div>
+
+  <!-- REJECTED -->
+  <div *ngIf="task.completion_status === 'rejected'">
+    <p class="rejected">❌ Rejected</p>
+
+    <button class="approve" (click)="review(task.id, 'approved')">
+      ✅ Approve Now
+    </button>
+  </div>
+
+  <!-- PENDING -->
+  <div *ngIf="task.completion_status === 'pending'">
+    <button class="approve" (click)="review(task.id, 'approved')">
+      ✅ Approve
+    </button>
+
+    <button class="reject" (click)="review(task.id, 'rejected')">
+      ❌ Reject
+    </button>
+
+    <div class="rating">
+      <label>Rating:</label>
+      <select [(ngModel)]="task.rating">
+        <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
+          {{ r }} ⭐
+        </option>
+      </select>
+    </div>
+
+    <textarea [(ngModel)]="task.comments"></textarea>
+
+    <button (click)="submitReview(task)">
+      Submit Review
+    </button>
+  </div>
+
+</div>
+
+  </div>
+
+</div>

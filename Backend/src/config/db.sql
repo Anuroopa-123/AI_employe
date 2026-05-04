@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS work_logs (
   work_date DATE,
   attachment_url TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_employee_task (employee_id, task_id),
   FOREIGN KEY (employee_id) REFERENCES organization_users(id),
   FOREIGN KEY (task_id) REFERENCES tasks(id)
 );

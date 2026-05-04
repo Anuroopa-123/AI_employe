@@ -1,0 +1,25 @@
+<div class="manager-dashboard">
+
+  <h1>📊 Manager Dashboard</h1>
+
+  <!-- CHART -->
+  <div class="card">
+    <h2>Team Performance</h2>
+    <canvas id="managerChart"></canvas>
+  </div>
+
+  <!-- TOP EMPLOYEES -->
+  <div class="card">
+    <h2>🏆 Top Performers</h2>
+
+    <div *ngIf="topEmployees.length === 0">
+      No completed tasks yet
+    </div>
+
+    <div *ngFor="let emp of topEmployees" class="employee">
+      <span>{{ emp.name }}</span>
+      <span>{{ emp.completed }} tasks</span>
+    </div>
+  </div>
+
+</div>

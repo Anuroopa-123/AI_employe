@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/* FORCE toastr above everything */
+.toast-container {
+  z-index: 999999 !important;
+}
+
+.toast-top-right {
+  top: 80px !important; /* below navbar */
+  right: 20px !important;
+}
+#toast-container {
+  position: fixed !important;
+  z-index: 999999 !important;
+  pointer-events: none;
+}
+
+#toast-container > div {
+  pointer-events: auto;
+}

@@ -1,29 +1,39 @@
 <div class="tasks-page">
-
-  <h1>Assign Task</h1>
-<div class="tasks-page">
-
-  <h1>Assign Task</h1>
+  <div class="header">
+    <h1>Assign Task</h1>
+    <p>Create and assign tasks to employees easily</p>
+  </div>
 
   <div class="card">
 
-    <input [(ngModel)]="task.title" placeholder="Task Title">
+    <div class="form-group">
+      <label>Task Title</label>
+      <input [(ngModel)]="task.title" placeholder="Enter task title">
+    </div>
 
-    <textarea [(ngModel)]="task.description" placeholder="Description"></textarea>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="task.description" placeholder="Enter task details"></textarea>
+    </div>
 
-    <!-- EMPLOYEE DROPDOWN -->
-    <select [(ngModel)]="task.assigned_to">
-      <option value="">Select Employee</option>
-      <option *ngFor="let emp of employees" [value]="emp.org_user_id">
-        {{ emp.name }} ({{ emp.employee_code }})
+    <div class="form-group">
+      <label>Assign To</label>
+      <select [(ngModel)]="task.assigned_to">
+        <option value="">Select Employee</option>
+        <option *ngFor="let emp of employees" [value]="emp.org_user_id">
+          {{ emp.name }} ({{ emp.employee_code }})
+        </option>
+      </select>
+    </div>
 
-      </option>
-    </select>
+    <div class="form-group">
+      <label>Deadline</label>
+      <input type="date" [(ngModel)]="task.deadline">
+    </div>
 
-    <input type="date" [(ngModel)]="task.deadline">
-
-    <button (click)="assignTask()">Assign Task</button>
+    <button (click)="assignTask()" class="btn-primary">
+      Assign Task 
+    </button>
 
   </div>
-
 </div>

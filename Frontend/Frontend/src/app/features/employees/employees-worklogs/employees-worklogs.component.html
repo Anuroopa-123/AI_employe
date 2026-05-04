@@ -1,0 +1,80 @@
+<div class="worklogs-container">
+
+  <h2>My Work Logs</h2>
+
+  <table class="log-table">
+
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Hours</th>
+        <th>Date</th>
+        <th>File</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let log of logs">
+
+        <td>{{ log.title }}</td>
+
+        <td>
+          <div *ngIf="editingLog?.id !== log.id">
+            {{ log.description }}
+          </div>
+
+          <textarea *ngIf="editingLog?.id === log.id"
+            [(ngModel)]="editingLog.description">
+          </textarea>
+        </td>
+
+        <td>
+          <div *ngIf="editingLog?.id !== log.id">
+            {{ log.hours_spent }}
+          </div>
+
+          <input *ngIf="editingLog?.id === log.id"
+            type="number"
+            [(ngModel)]="editingLog.hours_spent">
+        </td>
+
+        <td>{{ log.work_date | date }}</td>
+
+        <td>
+          <a *ngIf="log.attachment_url"
+             [href]="'http://localhost:5000/uploads/' + log.attachment_url"
+             target="_blank">
+             View
+          </a>
+        </td>
+
+        <td>
+
+          <div *ngIf="isToday(log.work_date)">
+
+            <button *ngIf="editingLog?.id !== log.id"
+              (click)="edit(log)">
+              Edit
+            </button>
+
+            <button *ngIf="editingLog?.id === log.id"
+              (click)="update()">
+              Save
+            </button>
+
+            <button (click)="delete(log.id)">
+              Delete
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

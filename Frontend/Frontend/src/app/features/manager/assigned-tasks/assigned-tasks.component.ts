@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { OrganizationService } from '../../../services/organization.service';
 import { FormsModule } from '@angular/forms';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-assigned-tasks',
   standalone: true,
@@ -18,7 +18,7 @@ export class AssignedTasksComponent implements OnInit {
   showEdit = false;
   selectedTask: any = {};
 
-  constructor(private http: HttpClient, private orgService: OrganizationService, private cd: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, private orgService: OrganizationService, private cd: ChangeDetectorRef, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.loadTasks();
@@ -35,17 +35,17 @@ updateTask() {
     `http://localhost:5000/api/tasks/update/${this.selectedTask.id}`,
     this.selectedTask
   ).subscribe(() => {
-    alert("Task updated");
+    this.toastr.success('Task updated successfully ');
     this.showEdit = false;
     this.loadTasks(); // refresh
   });
 }
 deleteTask(id: number) {
-  if (!confirm("Are you sure?")) return;
+//   if (!confirm("Are you sure?")) return;
 
   this.http.delete(`http://localhost:5000/api/tasks/delete/${id}`)
     .subscribe(() => {
-      alert("Deleted");
+    this.toastr.error('Task deleted ');
       this.loadTasks();
     });
 }
@@ -54,7 +54,7 @@ loadTasks() {
   this.orgService.getAssignedTasks()
     .subscribe({
       next: (res: any) => {
-        console.log("Tasks:", res);
+        // console.log("Tasks:", res);
 
         this.tasks = Array.isArray(res) ? res : res.data;
 
@@ -67,4 +67,5 @@ loadTasks() {
       }
     });
 }
+
 }

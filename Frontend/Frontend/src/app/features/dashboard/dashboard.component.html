@@ -61,6 +61,29 @@
 
     </div>
   </div>
+  <!-- 🔥 MANAGER ANALYTICS -->
+<div *ngIf="user?.role === 'Manager'" class="manager-insights">
+
+  <h2>📊 Team Performance</h2>
+
+  <div class="card chart-card">
+    <canvas id="managerEmployeeChart"></canvas>
+  </div>
+
+  <div class="card top-employee-card">
+    <h3>🏆 Top Performers</h3>
+
+    <div *ngIf="topEmployees.length === 0">
+      No completed tasks yet
+    </div>
+
+    <div *ngFor="let emp of topEmployees" class="employee-row">
+      <span>{{ emp.name }}</span>
+      <span>{{ emp.completed }} tasks</span>
+    </div>
+  </div>
+
+</div>
 
   <!-- Logout Button -->
   <div class="logout-section">

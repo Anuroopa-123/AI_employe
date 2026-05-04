@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-manager',
@@ -20,7 +22,7 @@ export class ManagerComponent {
     deadline: ''
   };
 
-constructor(private http: HttpClient) {}
+constructor(private http: HttpClient, private toastr: ToastrService,  private cdr: ChangeDetectorRef) {}
 ngOnInit() {
   this.loadEmployees();
 }
@@ -34,8 +36,27 @@ loadEmployees() {
 
 assignTask() {
   this.http.post('http://localhost:5000/api/tasks/assign', this.task)
-    .subscribe(() => {
-      alert("Task assigned");
+    .subscribe({
+      next: () => {
+        console.log("API SUCCESS");
+
+        this.toastr.success('Task assigned successfully ');
+
+        // FIX: delay change detection safely
+        setTimeout(() => {
+          this.task = {
+            title: '',
+            description: '',
+            assigned_to: '',
+            deadline: ''
+          };
+          this.cdr.detectChanges();
+        });
+      },
+      error: (err) => {
+        console.error("API ERROR:", err);
+        this.toastr.error('Task assignment failed ❌');
+      }
     });
 }
 }
