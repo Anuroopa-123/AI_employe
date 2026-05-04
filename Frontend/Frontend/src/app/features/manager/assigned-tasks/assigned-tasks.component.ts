@@ -54,7 +54,7 @@ loadTasks() {
   this.orgService.getAssignedTasks()
     .subscribe({
       next: (res: any) => {
-        console.log("Tasks:", res);
+        // console.log("Tasks:", res);
 
         this.tasks = Array.isArray(res) ? res : res.data;
 

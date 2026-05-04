@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-tasks',
@@ -14,7 +15,7 @@ export class EmployeeTasksComponent implements OnInit {
 
   tasks: any[] = [];
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.loadTasks();
@@ -36,6 +37,7 @@ export class EmployeeTasksComponent implements OnInit {
     { status }
   ).subscribe(() => {
     console.log("Status updated");
+    this.toastr.success('Status updated successfully');
 
     // reload tasks so UI syncs
     this.loadTasks();
@@ -45,7 +47,7 @@ markComplete(taskId: number) {
   this.http.put(`http://localhost:5000/api/tasks/status/${taskId}`, {
     status: 'completed'
   }).subscribe(() => {
-    alert("Marked as completed");
+    this.toastr.success('Task marked as completed');
     this.loadTasks();
   });
 }
@@ -66,7 +68,7 @@ submitWork(task: any) {
   this.http.post('http://localhost:5000/api/worklogs/add', formData)
     .subscribe({
       next: () => {
-        alert("Work submitted");
+        this.toastr.success('Work submitted successfully');
 
         // RESET UI
         task.uploading = false;
@@ -74,12 +76,12 @@ submitWork(task: any) {
         task.selectedFile = null;
         task.hours = null;
 
-        // 🔥 FORCE FULL REFRESH
+        //  FORCE FULL REFRESH
         this.tasks = [];
         this.loadTasks();
       },
       error: () => {
-        alert("Upload failed");
+        this.toastr.error('Upload failed');
         task.uploading = false;
       }
     });
