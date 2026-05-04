@@ -1,35 +1,43 @@
-<div class="tasks-wrapper">
+<div class="task-container">
 
-  <div class="tasks-header">My Tasks</div>
+  <h2>My Tasks</h2>
 
-  <div class="tasks-grid">
+  <div *ngFor="let task of tasks" class="task-card">
 
-    <div *ngFor="let task of tasks" class="task-card">
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
 
-      <h3>{{ task.title }}</h3>
-      <p>{{ task.description }}</p>
+    <p>Status: {{ task.status }}</p>
+    <p>Approval: {{ task.completion_status }}</p>
+    <p *ngIf="task.completion_status === 'rejected'" style="color:red;">
+  ❌ Your work was rejected. Please resubmit.
+</p>
 
-      <div class="task-row">
-        <span><strong>Status</strong></span>
+      <a *ngIf="task.attachment_url"
+     [href]="'http://localhost:5000/uploads/' + task.attachment_url"
+     target="_blank">
+     📎 View Uploaded Work
+  </a>
 
-        <select 
-          [ngClass]="task.status"
-          [value]="task.status"
-          (change)="updateStatus(task.id, $event)">
-          
-          <option value="pending">Pending</option>
-          <option value="in_progress">In Progress</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div>
+    <!-- Upload Work -->
+    <textarea [(ngModel)]="task.workLog" placeholder="Describe your work"></textarea>
+  
 
-      <div class="task-row">
-        <span class="deadline">
-          <strong>Deadline:</strong> {{ task.deadline | date:'shortDate' }}
-        </span>
-      </div>
+    <input type="file" (change)="onFileSelect($event, task)">
+    <input type="number" [(ngModel)]="task.hours" placeholder="Hours spent">
 
-    </div>
+<button 
+  (click)="submitWork(task)" 
+  [disabled]="task.uploading || task.completion_status === 'approved'">
+  {{ task.uploading ? 'Uploading...' : 'Submit Work' }}
+</button>
+
+    <!-- Mark Complete -->
+    <button 
+      *ngIf="task.status !== 'completed'"
+      (click)="markComplete(task.id)">
+      Mark Completed
+    </button>
 
   </div>
 

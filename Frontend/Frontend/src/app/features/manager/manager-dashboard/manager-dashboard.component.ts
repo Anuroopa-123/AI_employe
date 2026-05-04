@@ -37,14 +37,14 @@ export class ManagerDashboardComponent implements OnInit {
   renderChart() {
     if (!this.topEmployees.length) return;
 
-    new Chart("managerChart", {
-      type: 'pie',
-      data: {
-        labels: this.topEmployees.map(e => e.name),
-        datasets: [{
-          data: this.topEmployees.map(e => e.completed)
-        }]
-      }
-    });
+ new Chart("managerChart", {
+  type: 'pie',
+  data: {
+    labels: this.topEmployees.map(e => e.name),
+    datasets: [{
+      data: this.topEmployees.map(e => e.score)
+    }]
+  }
+});
   }
 }

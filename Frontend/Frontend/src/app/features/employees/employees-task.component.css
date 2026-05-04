@@ -101,3 +101,11 @@ select.completed {
   font-size: 13px;
   color: #475569;
 }
+.reject-box {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 8px 0;
+  font-size: 13px;
+}
