@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Chart from 'chart.js/auto'; // ✅ ADD THIS
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   intervalId: any;
   user: any;
+
+  // ✅ ADD THIS
+  topEmployees: any[] = [];
 
   constructor(private router: Router, private authService: AuthService) {
     const data = sessionStorage.getItem('user');
@@ -30,30 +34,65 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  // (inside class)
- ngOnInit() {
-  this.intervalId = setInterval(() => {
-    fetch('http://localhost:5000/api/auth/check-session', {
+  ngOnInit() {
+    this.startSessionCheck();
+
+    // ✅ LOAD MANAGER DATA
+    this.loadManagerStats();
+  }
+
+  // ✅ SESSION CHECK (your existing logic moved to function)
+  startSessionCheck() {
+    this.intervalId = setInterval(() => {
+      fetch('http://localhost:5000/api/auth/check-session', {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`
+        }
+      }).then(res => {
+        if (res.status === 401) {
+          clearInterval(this.intervalId);
+          sessionStorage.clear();
+          alert("Logged out from another device");
+          this.router.navigate(['/login']);
+        }
+      });
+    }, 3000);
+  }
+
+  // ✅ ADD THIS FUNCTION
+  loadManagerStats() {
+    if (this.user?.role !== 'Manager') return;
+
+    fetch('http://localhost:5000/api/manager/stats', {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`
       }
-    }).then(res => {
-      if (res.status === 401) {
+    })
+    .then(res => res.json())
+    .then((data) => {
+      this.topEmployees = data.topEmployees || [];
 
-        //  STOP LOOP FIRST
-        clearInterval(this.intervalId);
+      setTimeout(() => this.renderChart(), 0);
+    });
+  }
 
-        sessionStorage.clear();
+  // ✅ ADD THIS FUNCTION
+  renderChart() {
 
-        alert("Logged out from another device");
+    if (!this.topEmployees.length) return;
 
-        this.router.navigate(['/login']);
+    new Chart("managerEmployeeChart", {
+      type: 'pie',
+      data: {
+        labels: this.topEmployees.map(e => e.name),
+        datasets: [{
+          data: this.topEmployees.map(e => e.completed)
+        }]
       }
     });
-  }, 3000);
-}
 
-  // (inside class)
+  }
+
   ngOnDestroy() {
     if (this.intervalId) {
       clearInterval(this.intervalId);

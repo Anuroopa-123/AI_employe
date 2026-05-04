@@ -8,6 +8,7 @@ import authRoutes from "./modules/routes/auth/auth.routes.js";
 import orgRoutes from "./modules/routes/organization/org.routes.js";
 import taskRoutes from "./modules/routes/task/task.routes.js";
 import adminRoutes from "./modules/routes/admin/admin.routes.js";
+import managerRoutes from "./modules/routes/manager/manager.routes.js";
 
 const app = express();
 
@@ -56,7 +57,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/org", orgRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use('/api/admin', adminRoutes);
-
+app.use("/api/manager", managerRoutes);
 /* ===========================
    HEALTH CHECK
 =========================== */

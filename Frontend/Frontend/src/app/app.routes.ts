@@ -8,6 +8,7 @@ import { ManagerComponent } from './features/manager/manager.component';
 import { AdminEmployesComponent } from './features/admin/admin-employees/admin-employes.component';
 import { EmployeeTasksComponent } from './features/employees/employees-task.component';
 import { AssignedTasksComponent } from './features/manager/assigned-tasks/assigned-tasks.component';
+import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 
 
 export const routes: Routes = [
@@ -20,7 +21,7 @@ export const routes: Routes = [
     children: [
       { path: 'admin', component: AdminDashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'manager', component: ManagerComponent },
+      { path: 'manager', component: ManagerDashboardComponent },
       { path: 'manager/tasks', component: ManagerComponent },
       {
         path: 'manager/assigned',
