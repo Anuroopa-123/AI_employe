@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Component,OnInit, ChangeDetectorRef } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-employees-worklogs",
@@ -15,7 +16,7 @@ export class EmployeesWorklogsComponent implements OnInit {
   logs: any[] = [];
   editingLog: any = null;
 
-    constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
+    constructor(private http: HttpClient, private cd: ChangeDetectorRef,private toastr: ToastrService) {}
 ngOnInit() {
   this.loadLogs();
 }
@@ -42,7 +43,7 @@ update() {
     description: this.editingLog.description,
     hours_spent: this.editingLog.hours_spent
   }).subscribe(() => {
-    alert("Updated");
+    this.toastr.success('Work log updated successfully');
     this.editingLog = null;
     this.loadLogs();
   });
@@ -51,7 +52,7 @@ update() {
 delete(id: number) {
   this.http.delete(`http://localhost:5000/api/worklogs/${id}`)
     .subscribe(() => {
-      alert("Deleted");
+      this.toastr.success('Work log deleted successfully');
       this.loadLogs();
     });
 }
