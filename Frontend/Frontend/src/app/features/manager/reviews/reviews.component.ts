@@ -2,6 +2,7 @@ import { Component,OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reviews',
@@ -14,7 +15,7 @@ export class ReviewsComponent implements OnInit {
 
   tasks: any[] = [];
 
-  constructor(private http: HttpClient, private cdRef: ChangeDetectorRef) {}
+  constructor(private http: HttpClient, private cdRef: ChangeDetectorRef,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.loadTasks();
@@ -32,14 +33,14 @@ export class ReviewsComponent implements OnInit {
     this.http.put(`http://localhost:5000/api/tasks/review/${taskId}`, {
       completion_status: status
     }).subscribe(() => {
-      alert("Review updated");
+      this.toastr.success('Review Updated Successfully ');
       this.loadTasks();
     });
   }
 submitReview(task: any) {
 
   if (!task.rating) {
-    alert("Please select rating");
+    this.toastr.error('Please select a rating');
     return;
   }
 
@@ -49,7 +50,7 @@ submitReview(task: any) {
     rating: task.rating,
     comments: task.comments
   }).subscribe(() => {
-    alert("Feedback submitted");
+    this.toastr.success('Feedback submitted successfully');
     this.loadTasks();
   });
 }
