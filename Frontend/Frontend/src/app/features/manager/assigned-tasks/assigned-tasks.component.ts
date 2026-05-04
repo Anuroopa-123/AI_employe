@@ -41,7 +41,7 @@ updateTask() {
   });
 }
 deleteTask(id: number) {
-  if (!confirm("Are you sure?")) return;
+//   if (!confirm("Are you sure?")) return;
 
   this.http.delete(`http://localhost:5000/api/tasks/delete/${id}`)
     .subscribe(() => {

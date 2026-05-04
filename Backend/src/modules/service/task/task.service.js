@@ -87,5 +87,13 @@ export const updateTask = async (taskId, data) => {
 };
 
 export const deleteTask = async (taskId) => {
+
+  //  1. Delete dependent work logs FIRST
+  await pool.query(`DELETE FROM work_logs WHERE task_id = ?`, [taskId]);
+
+  // 2. Delete reviews (if exists)
+  await pool.query(`DELETE FROM reviews WHERE task_id = ?`, [taskId]);
+
+  // . Now delete task
   await pool.query(`DELETE FROM tasks WHERE id = ?`, [taskId]);
 };
