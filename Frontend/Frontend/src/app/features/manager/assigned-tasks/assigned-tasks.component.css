@@ -214,3 +214,19 @@ button:last-child:hover {
   margin-bottom: 15px;
   font-size: 14px;
 }
+
+.description-cell {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-center {
+  text-align: center;
+  padding: 20px;
+}
+
+.pending { background: #fef3c7; color: #d97706; padding: 4px 10px; border-radius: 12px; }
+.progress { background: #dbeafe; color: #2563eb; padding: 4px 10px; border-radius: 12px; }
+.done    { background: #d1fae5; color: #10b981; padding: 4px 10px; border-radius: 12px; }
