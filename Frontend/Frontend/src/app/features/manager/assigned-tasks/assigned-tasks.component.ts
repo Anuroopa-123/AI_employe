@@ -80,7 +80,7 @@ loadTasks() {
   }
 
   deleteTask(id: number) {
-    if (!confirm("Are you sure you want to delete this task?")) return;
+    // if (!confirm("Are you sure you want to delete this task?")) return;
 
     this.http.delete(`http://localhost:5000/api/tasks/delete/${id}`)
       .subscribe({
