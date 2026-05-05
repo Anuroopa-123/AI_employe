@@ -1,44 +1,95 @@
-<div class="task-container">
+<div class="tasks-wrapper">
 
-  <h2>My Tasks</h2>
+  <h2 class="tasks-header">My Tasks</h2>
 
-  <div *ngFor="let task of tasks" class="task-card">
+  <!-- KANBAN BOARD -->
+  <div class="kanban">
 
-    <h3>{{ task.title }}</h3>
-    <p>{{ task.description }}</p>
+    <!-- PENDING -->
+    <div cdkDropList [cdkDropListData]="pendingTasks" class="column"
+         (cdkDropListDropped)="drop($event, 'pending')">
+      <h3>Pending</h3>
 
-    <p>Status: {{ task.status }}</p>
-    <p>Approval: {{ task.completion_status }}</p>
-    <p *ngIf="task.completion_status === 'rejected'" style="color:red;">
-  ❌ Your work was rejected. Please resubmit.
-</p>
+      <div *ngFor="let task of pendingTasks" cdkDrag class="task-card">
+        <ng-container *ngTemplateOutlet="taskTemplate; context:{task:task}"></ng-container>
+      </div>
+    </div>
 
-      <a *ngIf="task.attachment_url"
-     [href]="'http://localhost:5000/uploads/' + task.attachment_url"
-     target="_blank">
-     📎 View Uploaded Work
-  </a>
+    <!-- IN PROGRESS -->
+    <div cdkDropList [cdkDropListData]="progressTasks" class="column"
+         (cdkDropListDropped)="drop($event, 'in_progress')">
+      <h3>In Progress</h3>
 
-    <!-- Upload Work -->
-    <textarea [(ngModel)]="task.workLog" placeholder="Describe your work"></textarea>
-  
+      <div *ngFor="let task of progressTasks" cdkDrag class="task-card">
+        <ng-container *ngTemplateOutlet="taskTemplate; context:{task:task}"></ng-container>
+      </div>
+    </div>
 
-    <input type="file" (change)="onFileSelect($event, task)">
-    <input type="number" [(ngModel)]="task.hours" placeholder="Hours spent">
+    <!-- COMPLETED -->
+    <div cdkDropList [cdkDropListData]="completedTasks" class="column"
+         (cdkDropListDropped)="drop($event, 'completed')">
+      <h3>Completed</h3>
 
-<button 
-  (click)="submitWork(task)" 
-  [disabled]="task.uploading || task.completion_status === 'approved'">
-  {{ task.uploading ? 'Uploading...' : 'Submit Work' }}
-</button>
-
-    <!-- Mark Complete -->
-    <button 
-      *ngIf="task.status !== 'completed'"
-      (click)="markComplete(task.id)">
-      Mark Completed
-    </button>
+      <div *ngFor="let task of completedTasks" cdkDrag class="task-card">
+        <ng-container *ngTemplateOutlet="taskTemplate; context:{task:task}"></ng-container>
+      </div>
+    </div>
 
   </div>
 
+</div>
+
+
+<!-- TASK TEMPLATE -->
+<ng-template #taskTemplate let-task="task">
+
+  <div class="task-top">
+    <h4>{{ task.title }}</h4>
+    <span class="badge" [ngClass]="task.status">{{ task.status }}</span>
+  </div>
+
+  <p>{{ task.description }}</p>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress">
+    <div class="progress-bar" 
+         [style.width.%]="task.status === 'completed' ? 100 : (task.status === 'in_progress' ? 60 : 20)">
+    </div>
+  </div>
+
+  <!-- APPROVAL -->
+  <p>Approval: <b [ngClass]="task.completion_status">{{ task.completion_status }}</b></p>
+
+  <!-- VIEW FILE (POPUP) -->
+  <button class="link-btn" *ngIf="task.attachment_url"
+          (click)="openFile(task)">
+    📎 View Work
+  </button>
+
+  <!-- WORK INPUT -->
+  <textarea [(ngModel)]="task.workLog" placeholder="Describe your work"></textarea>
+
+  <div class="upload-row">
+    <input type="file" (change)="onFileSelect($event, task)">
+    <input type="number" [(ngModel)]="task.hours" placeholder="Hours">
+  </div>
+
+  <button class="submit-btn"
+          (click)="submitWork(task)"
+          [disabled]="task.uploading || task.completion_status === 'approved'">
+    {{ task.uploading ? 'Uploading...' : 'Submit' }}
+  </button>
+
+</ng-template>
+
+
+<!-- FILE PREVIEW MODAL -->
+<div class="modal" *ngIf="previewUrl">
+  <div class="modal-content">
+
+    <span class="close" (click)="previewUrl=null">✖</span>
+
+    <iframe [src]="previewUrl" width="100%" height="400px"></iframe>
+
+  </div>
 </div>

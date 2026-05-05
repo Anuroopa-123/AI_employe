@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS tasks (
   completion_status ENUM('pending','approved','rejected'),
   deadline DATETIME,
   completed_at DATETIME,
+  order_index INT DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (assigned_to) REFERENCES organization_users(id),
   FOREIGN KEY (created_by) REFERENCES organization_users(id)

@@ -3,17 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CdkDragDrop, moveItemInArray, transferArrayItem,DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-employee-tasks',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,DragDropModule],
   templateUrl: './employees-task.component.html',
   styleUrls: ['./employees-task.component.css']
 })
 export class EmployeeTasksComponent implements OnInit {
 
   tasks: any[] = [];
+  previewUrl: any = null;
+  pendingTasks: any[] = [];
+  progressTasks: any[] = [];
+  completedTasks: any[] = [];
 
   constructor(private http: HttpClient, private cd: ChangeDetectorRef,private toastr: ToastrService) {}
 
@@ -26,6 +31,9 @@ export class EmployeeTasksComponent implements OnInit {
       .subscribe((res: any) => {
          console.log("EMP TASKS:", res);
         this.tasks = res;
+        this.pendingTasks = this.tasks.filter(t => t.status === 'pending');
+        this.progressTasks = this.tasks.filter(t => t.status === 'in_progress');
+        this.completedTasks = this.tasks.filter(t => t.status === 'completed');
         this.cd.detectChanges();
       });
   }
@@ -93,5 +101,41 @@ onFileSelect(event: any, task: any) {
   if (!file) return;
 
   task.selectedFile = file; // store file temporarily
+}
+drop(event: CdkDragDrop<any[]>, status: string) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    const task = event.container.data[event.currentIndex];
+    this.updateStatus(task.id, { target: { value: status } });
+  }
+
+  //  SAVE FULL ORDER
+  this.saveAllOrders();
+}
+saveAllOrders() {
+  const allTasks = [
+    ...this.pendingTasks,
+    ...this.progressTasks,
+    ...this.completedTasks
+  ];
+
+  const orderData = allTasks.map((task, index) => ({
+    id: task.id,
+    order_index: index
+  }));
+
+  this.http.put('http://localhost:5000/api/tasks/reorder', orderData)
+    .subscribe(() => console.log("Order saved"));
+}
+openFile(task: any) {
+  this.previewUrl = 'http://localhost:5000/uploads/' + task.attachment_url;
 }
 }

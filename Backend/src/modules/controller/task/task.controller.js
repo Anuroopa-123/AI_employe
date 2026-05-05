@@ -128,3 +128,20 @@ export const addReview = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+export const reorderTasks = async (req, res) => {
+  try {
+    const tasks = req.body;
+
+    for (const t of tasks) {
+      await pool.query(
+        `UPDATE tasks SET order_index = ? WHERE id = ?`,
+        [t.order_index, t.id]
+      );
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

@@ -12,20 +12,27 @@ export const createTask = async (task) => {
 };
 
 export const getTasksForEmployee = async (employeeId) => {
-  const [rows] = await pool.query(`
-    SELECT 
-      t.*,
-      u.name AS employee_name,
-      ou.employee_code,
-      wl.attachment_url
-    FROM tasks t
-    JOIN organization_users ou ON t.assigned_to = ou.id
-    JOIN users u ON ou.user_id = u.id
-    LEFT JOIN work_logs wl 
-      ON wl.task_id = t.id 
-      AND wl.employee_id = ?
-    WHERE t.assigned_to = ?
-  `, [employeeId, employeeId]); //  FIXED
+const [rows] = await pool.query(`
+  SELECT 
+    t.*,
+    u.name AS employee_name,
+    ou.employee_code,
+    wl.attachment_url
+  FROM tasks t
+  JOIN organization_users ou ON t.assigned_to = ou.id
+  JOIN users u ON ou.user_id = u.id
+  LEFT JOIN work_logs wl 
+    ON wl.task_id = t.id 
+    AND wl.employee_id = ?
+  WHERE t.assigned_to = ?
+  ORDER BY 
+    CASE 
+      WHEN t.status = 'pending' THEN 1
+      WHEN t.status = 'in_progress' THEN 2
+      WHEN t.status = 'completed' THEN 3
+    END,
+    t.order_index ASC
+`, [employeeId, employeeId]);
 
   return rows;
 };
