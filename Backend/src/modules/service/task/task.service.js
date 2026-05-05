@@ -1,13 +1,20 @@
 import pool from "../../../config/db.js";
 
 export const createTask = async (task) => {
-  const { title, description, assigned_to, created_by, deadline } = task;
+  const { title, description, assigned_to, created_by, deadline, priority } = task;
 
   await pool.query(
     `INSERT INTO tasks 
-     (title, description, assigned_to, created_by, status, deadline)
-     VALUES (?, ?, ?, ?, 'pending', ?)`,
-    [title, description, assigned_to, created_by, deadline]
+     (title, description, assigned_to, created_by, status, deadline, priority)
+     VALUES (?, ?, ?, ?, 'pending', ?, ?)`,
+    [
+      title,
+      description,
+      assigned_to,
+      created_by,
+      deadline,
+      priority || 'low' // default
+    ]
   );
 };
 
@@ -21,9 +28,11 @@ const [rows] = await pool.query(`
   FROM tasks t
   JOIN organization_users ou ON t.assigned_to = ou.id
   JOIN users u ON ou.user_id = u.id
-  LEFT JOIN work_logs wl 
-    ON wl.task_id = t.id 
-    AND wl.employee_id = ?
+LEFT JOIN (
+  SELECT task_id, MAX(attachment_url) as attachment_url
+  FROM work_logs
+  GROUP BY task_id
+) wl ON wl.task_id = t.id
   WHERE t.assigned_to = ?
   ORDER BY 
     CASE 
@@ -73,9 +82,11 @@ const [rows] = await pool.query(`
   FROM tasks t
   JOIN organization_users ou ON t.assigned_to = ou.id
   JOIN users u ON ou.user_id = u.id
-  LEFT JOIN work_logs wl 
-    ON wl.task_id = t.id 
-    AND wl.employee_id = ou.id
+LEFT JOIN (
+  SELECT task_id, MAX(attachment_url) as attachment_url
+  FROM work_logs
+  GROUP BY task_id
+) wl ON wl.task_id = t.id
   WHERE t.created_by = ?
   ORDER BY t.created_at DESC
 `, [managerId]);

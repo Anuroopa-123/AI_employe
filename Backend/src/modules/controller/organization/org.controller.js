@@ -6,8 +6,10 @@ export const getEmployees = async (req, res) => {
   try {
     const [rows] = await pool.query(`
       SELECT 
+        u.id, 
         u.name, 
         u.email,
+        u.status,
         ou.id AS org_user_id,
         ou.employee_code,  
         r.name AS role
@@ -84,4 +86,15 @@ export const updateRole = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
+};
+
+export const toggleUserStatus = async (req, res) => {
+  const { user_id, status } = req.body;
+
+  await pool.query(
+    "UPDATE users SET status = ? WHERE id = ?",
+    [status, user_id]
+  );
+
+  res.json({ success: true });
 };

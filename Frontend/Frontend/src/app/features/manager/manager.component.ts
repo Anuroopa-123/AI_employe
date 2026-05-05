@@ -19,7 +19,8 @@ export class ManagerComponent {
     title: '',
     description: '',
     assigned_to: '',
-    deadline: ''
+    deadline: '',
+    priority: 'low' 
   };
 
 constructor(private http: HttpClient, private toastr: ToastrService,  private cdr: ChangeDetectorRef) {}
@@ -48,7 +49,8 @@ assignTask() {
             title: '',
             description: '',
             assigned_to: '',
-            deadline: ''
+            deadline: '',
+            priority: 'low'
           };
           this.cdr.detectChanges();
         });

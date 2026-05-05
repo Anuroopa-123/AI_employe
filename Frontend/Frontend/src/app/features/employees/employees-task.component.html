@@ -10,7 +10,15 @@
          (cdkDropListDropped)="drop($event, 'pending')">
       <h3>Pending</h3>
 
-      <div *ngFor="let task of pendingTasks" cdkDrag class="task-card">
+      <div *ngFor="let task of pendingTasks" cdkDrag>
+         <div 
+    class="task-card"
+    [ngClass]="{
+      'urgent': isUrgent(task),
+      'high-priority': task.priority === 'high',
+      'medium-priority': task.priority === 'medium',
+      'low-priority': task.priority === 'low'
+    }">
         <ng-container *ngTemplateOutlet="taskTemplate; context:{task:task}"></ng-container>
       </div>
     </div>
@@ -20,7 +28,16 @@
          (cdkDropListDropped)="drop($event, 'in_progress')">
       <h3>In Progress</h3>
 
-      <div *ngFor="let task of progressTasks" cdkDrag class="task-card">
+      <div *ngFor="let task of progressTasks" cdkDrag>
+         <div 
+    class="task-card"
+    [ngClass]="{
+      'urgent': isUrgent(task),
+      'high-priority': task.priority === 'high',
+      'medium-priority': task.priority === 'medium',
+      'low-priority': task.priority === 'low'
+    }">
+
         <ng-container *ngTemplateOutlet="taskTemplate; context:{task:task}"></ng-container>
       </div>
     </div>
@@ -30,7 +47,16 @@
          (cdkDropListDropped)="drop($event, 'completed')">
       <h3>Completed</h3>
 
-      <div *ngFor="let task of completedTasks" cdkDrag class="task-card">
+      <div *ngFor="let task of completedTasks" cdkDrag>
+         <div 
+    class="task-card"
+    [ngClass]="{
+      'urgent': isUrgent(task),
+      'high-priority': task.priority === 'high',
+      'medium-priority': task.priority === 'medium',
+      'low-priority': task.priority === 'low'
+    }">
+
         <ng-container *ngTemplateOutlet="taskTemplate; context:{task:task}"></ng-container>
       </div>
     </div>
@@ -46,9 +72,25 @@
   <div class="task-top">
     <h4>{{ task.title }}</h4>
     <span class="badge" [ngClass]="task.status">{{ task.status }}</span>
+       <span class="priority" [ngClass]="task.priority">
+      {{ task.priority }}
+    </span>
   </div>
+<button 
+  class="start-btn"
+  *ngIf="task.status === 'pending'"
+  (click)="updateStatus(task.id, { target: { value: 'in_progress' } })">
+
+  <span class="material-icons">play_arrow</span>
+  Start Task
+</button>
 
   <p>{{ task.description }}</p>
+  <p 
+  class="deadline" 
+  [ngClass]="{'overdue': isOverdue(task.deadline)}">
+  Deadline: {{ task.deadline | date:'shortDate' }}
+</p>
 
   <!-- PROGRESS BAR -->
   <div class="progress">

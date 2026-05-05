@@ -71,3 +71,54 @@ th, td {
   padding: 12px;
   border-bottom: 1px solid #eee;
 }
+.active {
+  color: green;
+  font-weight: bold;
+}
+
+.inactive {
+  color: red;
+  font-weight: bold;
+}
+.status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.toggle-icon {
+  font-size: 28px;
+  transition: 0.3s;
+}
+
+/* ACTIVE */
+.active {
+  color: green;
+  font-weight: 600;
+}
+
+/* INACTIVE */
+.inactive {
+  color: red;
+  font-weight: 600;
+}
+
+/* ICON COLORS */
+.status-toggle .material-icons {
+  color: #9ca3af;
+}
+
+.status-toggle:hover .material-icons {
+  transform: scale(1.2);
+}
+
+/* ACTIVE ICON */
+.status-toggle .material-icons.toggle_on {
+  color: #22c55e;
+}
+
+/* INACTIVE ICON */
+.status-toggle .material-icons.toggle_off {
+  color: #ef4444;
+}

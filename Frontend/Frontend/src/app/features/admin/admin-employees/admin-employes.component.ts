@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from '../../../services/organization.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-employes',
@@ -21,7 +22,7 @@ export class AdminEmployesComponent implements OnInit {
     role_id: 3
   };
 
-  constructor(private orgService: OrganizationService) {}
+  constructor(private http: HttpClient, private orgService: OrganizationService) {}
 
   ngOnInit() {
     this.loadEmployees();
@@ -50,4 +51,14 @@ export class AdminEmployesComponent implements OnInit {
       this.loadEmployees();
     });
   }
+toggleStatus(emp: any) {
+  const newStatus = emp.status === 'active' ? 'inactive' : 'active';
+
+  this.http.post('http://localhost:5000/api/org/toggle-status', {
+    user_id: emp.id,
+    status: newStatus
+  }).subscribe(() => {
+    this.loadEmployees(); // refresh UI
+  });
+}
 }

@@ -1,5 +1,4 @@
 <div class="tasks-container">
-
   <h1>Assigned Tasks</h1>
 
   <table>
@@ -15,51 +14,62 @@
       </tr>
     </thead>
 
-  <tbody *ngIf="tasks && tasks.length > 0; else noData">
-  <tr *ngFor="let task of tasks">
-    <td>{{ task.employee_name }}</td>
-    <td>{{ task.employee_code || 'N/A' }}</td>
-    <td>{{ task.title }}</td>
-    <td>{{ task.description }}</td>
-    <!-- <td>{{ task.status }}</td> -->
-     <td>
-  <span 
-    [ngClass]="{
-      'pending': task.status === 'pending',
-      'progress': task.status === 'in_progress',
-      'done': task.status === 'completed'
-    }">
-    {{ task.status }}
-  </span>
-</td>
-    <td>{{ task.deadline | date:'shortDate' }}</td>
-    <td>
-        <button (click)="openEdit(task)">Edit</button>
-        <button (click)="deleteTask(task.id)">Delete</button>
-    </td>
-  </tr>
-</tbody>
+    <!-- Actual Data -->
+    <tbody *ngIf="!loading && tasks.length > 0">
+      <tr *ngFor="let task of tasks">
+        <td>{{ task.employee_name || 'N/A' }}</td>
+        <td>{{ task.employee_code || 'N/A' }}</td>
+        <td>{{ task.title }}</td>
+        <td class="description-cell">{{ task.description }}</td>
+        
+        <td>
+          <span [ngClass]="{
+            'pending': task.status === 'pending',
+            'progress': task.status === 'in_progress',
+            'done': task.status === 'completed'
+          }">
+            {{ (task.status || 'Pending') | titlecase }}
+          </span>
+        </td>
+        
+        <td>{{ task.deadline | date:'shortDate' }}</td>
+        
+        <td>
+          <button (click)="openEdit(task)">Edit</button>
+          <button (click)="deleteTask(task.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
 
-<ng-template #noData>
-  <tr>
-    <td colspan="5" style="text-align:center;">No tasks found</td>
-  </tr>
-</ng-template>
+    <!-- Loading State -->
+    <tbody *ngIf="loading">
+      <tr>
+        <td colspan="7" class="text-center">
+          <strong>Loading tasks...</strong>
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- No Data -->
+    <tbody *ngIf="!loading && tasks.length === 0">
+      <tr>
+        <td colspan="7" class="text-center">No tasks found</td>
+      </tr>
+    </tbody>
   </table>
-  <!-- EDIT MODAL -->
-<div class="modal" *ngIf="showEdit">
-  <div class="modal-content">
-    <h2>Edit Task</h2>
 
-    <input [(ngModel)]="selectedTask.title" placeholder="Title">
-    <textarea [(ngModel)]="selectedTask.description"></textarea>
-    <input type="date" [(ngModel)]="selectedTask.deadline">
+  <!-- Edit Modal -->
+  <div class="modal" *ngIf="showEdit">
+    <div class="modal-content">
+      <h2>Edit Task</h2>
+      <input [(ngModel)]="selectedTask.title" placeholder="Title">
+      <textarea [(ngModel)]="selectedTask.description" placeholder="Description"></textarea>
+      <input type="date" [(ngModel)]="selectedTask.deadline">
 
- <div class="modal-actions">
-  <button class="save-btn" (click)="updateTask()">Save</button>
-  <button class="cancel-btn" (click)="closeEdit()">Cancel</button>
-</div>
+      <div class="modal-actions">
+        <button class="save-btn" (click)="updateTask()">Save</button>
+        <button class="cancel-btn" (click)="closeEdit()">Cancel</button>
+      </div>
+    </div>
   </div>
-</div>
-
 </div>

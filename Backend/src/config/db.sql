@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(100),
   email VARCHAR(100) UNIQUE,
   password VARCHAR(255),
+  status ENUM('active','inactive') DEFAULT 'active',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS roles (
@@ -52,6 +53,7 @@ CREATE TABLE IF NOT EXISTS tasks (
   created_by INT,
   status ENUM('pending','in_progress','completed'),
   completion_status ENUM('pending','approved','rejected'),
+  priority ENUM('low','medium','high') DEFAULT 'low',
   deadline DATETIME,
   completed_at DATETIME,
   order_index INT DEFAULT 0,
