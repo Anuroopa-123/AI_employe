@@ -11,6 +11,7 @@ import { AssignedTasksComponent } from './features/manager/assigned-tasks/assign
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { ReviewsComponent } from './features/manager/reviews/reviews.component';
 import { EmployeesWorklogsComponent } from './features/employees/employees-worklogs/employees-worklogs.component';
+import { ProfileComponent } from './features/user/profile.component';
 
 
 export const routes: Routes = [
@@ -44,6 +45,7 @@ export const routes: Routes = [
         component: EmployeesWorklogsComponent,
       },
       { path: 'admin-employes', component: AdminEmployesComponent },
+      {path:'profile', component: ProfileComponent}
     ],
   },
 ];

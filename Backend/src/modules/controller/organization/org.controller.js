@@ -1,6 +1,7 @@
 import pool from "../../../config/db.js";
 import bcrypt from "bcrypt";
-
+import { getProfileService, updateProfileService } 
+from "../../service/organization/org.service.js";
 // GET EMPLOYEES
 export const getEmployees = async (req, res) => {
   try {
@@ -97,4 +98,32 @@ export const toggleUserStatus = async (req, res) => {
   );
 
   res.json({ success: true });
+};
+
+// PROFILE - GET
+export const getProfile = async (req, res) => {
+  try {
+    const orgUserId = req.user.orgUserId;
+
+    const profile = await getProfileService(orgUserId);
+
+    res.json(profile);
+  } catch (err) {
+    console.error("GET PROFILE ERROR:", err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// PROFILE - UPDATE
+export const updateProfile = async (req, res) => {
+  try {
+    const orgUserId = req.user.orgUserId;
+
+    await updateProfileService(orgUserId, req.body);
+
+    res.json({ success: true, message: "Profile updated" });
+  } catch (err) {
+    console.error("UPDATE PROFILE ERROR:", err);
+    res.status(500).json({ message: err.message });
+  }
 };
