@@ -172,3 +172,51 @@ textarea {
   cursor:pointer;
   font-size: 18px;
 }
+.priority {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  margin-left: 6px;
+}
+
+/* COLORS */
+.priority.high {
+  background: #ef4444; /* red */
+}
+
+.priority.medium {
+  background: #f59e0b; /* yellow */
+}
+
+.priority.low {
+  background: #6b7280; /* gray */
+}
+.deadline {
+  font-size: 13px;
+  color: #555;
+}
+
+.deadline.overdue {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.task-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* DRAG ANIMATION */
+.cdk-drag-preview {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}

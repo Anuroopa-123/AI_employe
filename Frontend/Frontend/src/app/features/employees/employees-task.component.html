@@ -46,9 +46,17 @@
   <div class="task-top">
     <h4>{{ task.title }}</h4>
     <span class="badge" [ngClass]="task.status">{{ task.status }}</span>
+       <span class="priority" [ngClass]="task.priority">
+      {{ task.priority }}
+    </span>
   </div>
 
   <p>{{ task.description }}</p>
+  <p 
+  class="deadline" 
+  [ngClass]="{'overdue': isOverdue(task.deadline)}">
+  Deadline: {{ task.deadline | date:'shortDate' }}
+</p>
 
   <!-- PROGRESS BAR -->
   <div class="progress">

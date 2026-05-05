@@ -95,6 +95,12 @@ submitWork(task: any) {
     });
 }
 
+isOverdue(deadline: string) {
+  if (!deadline) return false;
+
+  return new Date(deadline) < new Date();
+}
+
 onFileSelect(event: any, task: any) {
   const file = event.target.files[0];
 

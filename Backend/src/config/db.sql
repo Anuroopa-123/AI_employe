@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS tasks (
   created_by INT,
   status ENUM('pending','in_progress','completed'),
   completion_status ENUM('pending','approved','rejected'),
+  priority ENUM('low','medium','high') DEFAULT 'low',
   deadline DATETIME,
   completed_at DATETIME,
   order_index INT DEFAULT 0,

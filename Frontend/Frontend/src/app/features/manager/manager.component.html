@@ -30,6 +30,14 @@
       <label>Deadline</label>
       <input type="date" [(ngModel)]="task.deadline">
     </div>
+    <div class="form-group">
+  <label>Priority</label>
+  <select [(ngModel)]="task.priority">
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+</div>
 
     <button (click)="assignTask()" class="btn-primary">
       Assign Task 
