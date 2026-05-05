@@ -34,6 +34,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -43,6 +44,25 @@
           <td>{{ emp.name }}</td>
           <td>{{ emp.email }}</td>
           <td>{{ emp.role }}</td>
+          <td>
+            <!-- <span [ngClass]="emp.status === 'active' ? 'active' : 'inactive'">
+              {{ emp.status }}
+            </span> -->
+          
+         <div class="status-toggle" (click)="toggleStatus(emp)">
+  
+  <span 
+    class="status-text"
+    [ngClass]="emp.status === 'active' ? 'active' : 'inactive'">
+    {{ emp.status }}
+  </span>
+
+  <span class="material-icons toggle-icon">
+    {{ emp.status === 'active' ? 'toggle_on' : 'toggle_off' }}
+  </span>
+
+</div>
+          </td>
 
           <td>
             <button class="btn-green" (click)="changeRole(emp, 2)">Manager</button>

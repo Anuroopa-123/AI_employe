@@ -95,6 +95,17 @@ submitWork(task: any) {
     });
 }
 
+isUrgent(task: any) {
+  if (!task.deadline) return false;
+
+  const deadline = new Date(task.deadline);
+  const now = new Date();
+
+  const diff = (deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
+
+  return diff <= 2 && task.status !== 'completed';
+}
+
 isOverdue(deadline: string) {
   if (!deadline) return false;
 
