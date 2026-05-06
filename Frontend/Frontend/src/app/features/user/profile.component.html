@@ -1,0 +1,106 @@
+<div class="profile-page">
+  <div class="profile-header">
+    <h1>My Profile</h1>
+    <button class="edit-btn" (click)="openModal()">
+      ✏️ Edit Profile
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading your profile...</div>
+
+  <div class="profile-card" *ngIf="!loading">
+    <!-- Profile Picture -->
+    <div class="profile-pic-container">
+      <div class="pic-wrapper">
+        <img 
+          [src]="getProfileImageUrl()" 
+          alt="Profile" 
+          class="profile-pic"
+          (error)="onImageError($event)">
+        <div *ngIf="!profile.profile_pic" class="default-avatar">👤</div>
+      </div>
+    </div>
+
+    <div class="profile-info">
+      <h2>{{ profile.name || 'N/A' }}</h2>
+      <p class="email">{{ profile.email || 'N/A' }}</p>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Phone</span>
+          <p>{{ profile.phone || 'Not provided' }}</p>
+        </div>
+        <div class="info-item">
+          <span class="label">Department</span>
+          <p>{{ profile.department || 'Not provided' }}</p>
+        </div>
+        <div class="info-item">
+          <span class="label">Designation</span>
+          <p>{{ profile.designation || 'Not provided' }}</p>
+        </div>
+        <div class="info-item">
+          <span class="label">Employee Code</span>
+          <p>{{ profile.employee_code || 'N/A' }}</p>
+        </div>
+      </div>
+
+      <div class="bio-section">
+        <span class="label">Skills</span>
+        <p>{{ profile.skills || 'No skills added yet' }}</p>
+      </div>
+
+      <div class="bio-section">
+        <span class="label">Bio</span>
+        <p>{{ profile.bio || 'No bio available' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-card">
+
+    <h2>Edit Profile</h2>
+
+    <div class="form-grid">
+
+      <div class="form-row">
+        <label>Profile Picture</label>
+        <input type="file" (change)="onFileSelected($event)" />
+      </div>
+
+      <div class="form-row">
+        <label>Phone</label>
+        <input [(ngModel)]="profile.phone" placeholder="Enter phone number" />
+      </div>
+
+      <div class="form-row">
+        <label>Department</label>
+        <input [(ngModel)]="profile.department" />
+      </div>
+
+      <div class="form-row">
+        <label>Designation</label>
+        <input [(ngModel)]="profile.designation" />
+      </div>
+
+      <div class="form-row full">
+        <label>Skills</label>
+        <textarea [(ngModel)]="profile.skills"></textarea>
+      </div>
+
+      <div class="form-row full">
+        <label>Bio</label>
+        <textarea [(ngModel)]="profile.bio"></textarea>
+      </div>
+
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button class="save-btn" (click)="updateProfile()">Save</button>
+    </div>
+
+  </div>
+</div>

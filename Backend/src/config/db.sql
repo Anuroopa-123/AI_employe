@@ -23,19 +23,32 @@ CREATE TABLE IF NOT EXISTS organizations (
 
 CREATE TABLE IF NOT EXISTS organization_users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT,
-  organization_id INT,
-  role_id INT,
+  
+  user_id INT NOT NULL,
+  organization_id INT NOT NULL,
+  role_id INT NOT NULL,
 
-  employee_code VARCHAR(20) UNIQUE,   
+  employee_code VARCHAR(20) UNIQUE,
 
   designation VARCHAR(100),
-  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  status ENUM('active','inactive') DEFAULT 'active',
+  department VARCHAR(100),
+  
+  phone VARCHAR(15),
+  profile_pic VARCHAR(255),
+  
+  skills TEXT,
+  bio TEXT,
 
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (organization_id) REFERENCES organizations(id),
-  FOREIGN KEY (role_id) REFERENCES roles(id)
+  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  status ENUM('active', 'inactive') DEFAULT 'active',
+
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (organization_id) REFERENCES organizations(id) ON DELETE CASCADE,
+  FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE RESTRICT,
+
+  INDEX idx_employee_code (employee_code),
+  INDEX idx_organization (organization_id),
+  INDEX idx_user (user_id)
 );
 CREATE TABLE IF NOT EXISTS reporting_structure (
   id INT AUTO_INCREMENT PRIMARY KEY,

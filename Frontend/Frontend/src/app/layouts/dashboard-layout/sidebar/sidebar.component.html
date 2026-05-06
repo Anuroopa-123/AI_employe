@@ -64,6 +64,15 @@
     </ng-container>
   </div>
 
+  <div class="nav-section">
+  <h4 class="section-title">Account</h4>
+
+  <a (click)="navigate('/profile')" class="nav-item">
+    <span class="material-icons">person</span>
+    <span>My Profile</span>
+  </a>
+</div>
+
   <div class="sidebar-footer">
     <div class="user-preview">
       <div class="avatar">{{ user?.name?.charAt(0) || 'U' }}</div>
