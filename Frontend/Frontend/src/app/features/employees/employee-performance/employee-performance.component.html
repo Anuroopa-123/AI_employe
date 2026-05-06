@@ -1,0 +1,70 @@
+<div class="performance-page">
+  <div class="hero-section">
+    <div>
+      <h1>Performance Dashboard</h1>
+      <p>AI-powered employee productivity analytics</p>
+    </div>
+
+    <div class="overall-score" *ngIf="metrics">
+      <div class="score-circle">
+        <div class="inner-circle">
+          <h2>{{ metrics.finalScore | number:'1.0-0' }}</h2>
+          <span>{{ getPerformanceLabel(metrics.finalScore) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="!metrics" class="loading-box">
+    <div class="spinner"></div>
+    <p>Loading performance metrics...</p>
+  </div>
+
+  <!-- Metrics Grid -->
+  <div class="metrics-grid" *ngIf="metrics">
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="icon">🚀</span>
+        <h3>Productivity</h3>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill blue" [style.width.%]="metrics.productivityScore"></div>
+      </div>
+      <h2>{{ metrics.productivityScore | number:'1.0-0' }}%</h2>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="icon">📅</span>
+        <h3>Consistency</h3>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill orange" [style.width.%]="metrics.consistencyScore"></div>
+      </div>
+      <h2>{{ metrics.consistencyScore | number:'1.0-0' }}%</h2>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="icon">⏳</span>
+        <h3>Deadline Adherence</h3>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill green" [style.width.%]="metrics.deadlineScore"></div>
+      </div>
+      <h2>{{ metrics.deadlineScore | number:'1.0-0' }}%</h2>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="icon">⭐</span>
+        <h3>Manager Rating</h3>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill purple" [style.width.%]="metrics.managerRatingAvg"></div>
+      </div>
+      <h2>{{ metrics.managerRatingAvg | number:'1.0-0' }}%</h2>
+    </div>
+  </div>
+</div>

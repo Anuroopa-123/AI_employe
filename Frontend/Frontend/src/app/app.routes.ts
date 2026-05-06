@@ -12,6 +12,7 @@ import { ManagerDashboardComponent } from './features/manager/manager-dashboard/
 import { ReviewsComponent } from './features/manager/reviews/reviews.component';
 import { EmployeesWorklogsComponent } from './features/employees/employees-worklogs/employees-worklogs.component';
 import { ProfileComponent } from './features/user/profile.component';
+import { PerformanceDashboardComponent } from './features/employees/employee-performance/employee-performance.component';
 
 
 export const routes: Routes = [
@@ -45,7 +46,8 @@ export const routes: Routes = [
         component: EmployeesWorklogsComponent,
       },
       { path: 'admin-employes', component: AdminEmployesComponent },
-      {path:'profile', component: ProfileComponent}
+      {path:'profile', component: ProfileComponent},
+      {path:'employee/performance', component: PerformanceDashboardComponent}
     ],
   },
 ];

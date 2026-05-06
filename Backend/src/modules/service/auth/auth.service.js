@@ -48,46 +48,71 @@ export const registerUser = async (name, email, password) => {
 
 // LOGIN
 export const loginUser = async (email, password) => {
+
   const user = await findUserByEmail(email);
 
-  if (!user) throw new Error("User not found");
+  if (!user) {
+    throw new Error("User not found");
+  }
 
   const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) throw new Error("Invalid password");
 
-  //  1. GET ROLE FROM DB (THIS WAS MISSING)
-  const [roleRow] = await pool.query(
-    `SELECT r.name 
-     FROM organization_users ou
-     JOIN roles r ON ou.role_id = r.id
-     WHERE ou.user_id = ?`,
+  if (!isMatch) {
+    throw new Error("Invalid password");
+  }
+
+  // ✅ GET ROLE + ORG USER ID
+const [roleRow] = await pool.query(
+  `SELECT 
+      r.name as role,
+      ou.id as org_user_id,
+      ou.organization_id,
+      ou.employee_code
+   FROM organization_users ou
+   JOIN roles r ON ou.role_id = r.id
+   WHERE ou.user_id = ?`,
+  [user.id]
+);
+
+user.role = roleRow[0]?.role || "Employee";
+user.org_user_id = roleRow[0]?.org_user_id;
+user.organization_id = roleRow[0]?.organization_id;
+user.employee_code = roleRow[0]?.employee_code;
+
+  // DELETE OLD SESSION
+  await pool.query(
+    "DELETE FROM user_sessions WHERE user_id = ?",
     [user.id]
   );
 
-  // Assign role
-  user.role = roleRow[0]?.name || "Employee";
-
-  //  2. DELETE OLD SESSION (clean)
-  await pool.query("DELETE FROM user_sessions WHERE user_id = ?", [user.id]);
-
-  //  3. CREATE TOKEN
+  // TOKEN
   const token = jwt.sign(
-    { id: user.id, email: user.email },
+    {
+      id: user.id,
+      email: user.email
+    },
     process.env.JWT_SECRET,
     { expiresIn: "1d" }
   );
 
   const sessionId = uuidv4();
 
-  //  4. INSERT NEW SESSION
+  // SAVE SESSION
   await pool.query(
-    `INSERT INTO user_sessions (user_id, token, session_id, is_active, expires_at)
-     VALUES (?, ?, ?, TRUE, DATE_ADD(NOW(), INTERVAL 5 MINUTE))`,
+    `
+    INSERT INTO user_sessions
+    (user_id, token, session_id, is_active, expires_at)
+    VALUES (?, ?, ?, TRUE, DATE_ADD(NOW(), INTERVAL 1 DAY))
+    `,
     [user.id, token, sessionId]
   );
 
-  // 5. REMOVE PASSWORD
+  // REMOVE PASSWORD
   delete user.password;
 
-  return { token, user, sessionId };
+  return {
+    token,
+    user,
+    sessionId
+  };
 };
