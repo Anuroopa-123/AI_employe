@@ -18,11 +18,33 @@ export const generateEmployeeFeedback = async (employeeId) => {
       WHERE employee_id = ? 
       ORDER BY calculated_at DESC LIMIT 1
     `, [employeeId]);
+    const [tasks] = await pool.query(`
+SELECT title, status, priority
+FROM tasks
+WHERE assigned_to = ?
+LIMIT 5
+`, [employeeId]);
+
+const [worklogs] = await pool.query(`
+SELECT description, hours_spent
+FROM work_logs
+WHERE employee_id = ?
+LIMIT 5
+`, [employeeId]);
+
+const [reviews] = await pool.query(`
+SELECT rating, comments
+FROM reviews
+WHERE employee_id = ?
+LIMIT 5
+`, [employeeId]);
 
     const profile = profileRows[0] || {};
     const metrics = metricRows[0] || {};
 
-    const prompt = buildPerformancePrompt({ ...profile, ...metrics });
+    const prompt = buildPerformancePrompt({ ...profile, ...metrics,  tasks: JSON.stringify(tasks),
+  worklogs: JSON.stringify(worklogs),
+  reviews: JSON.stringify(reviews) });
 
     // Call Ollama
     const response = await ollama.post("/api/generate", {
