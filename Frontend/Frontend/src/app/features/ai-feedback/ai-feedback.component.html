@@ -1,0 +1,30 @@
+<div class="ai-page">
+  <div class="hero">
+    <div>
+      <h1>AI Performance Insights</h1>
+      <p>AI-generated analysis based on your tasks, work logs, reviews and productivity.</p>
+    </div>
+    
+    <button class="generate-btn" (click)="generateFeedback()" [disabled]="loading">
+      {{ loading ? 'Generating...' : '🤖 Generate AI Feedback' }}
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-card">
+    <div class="spinner"></div>
+    <p>AI is analyzing your performance...</p>
+    <small>This may take 10-30 seconds</small>
+  </div>
+
+  <!-- AI Feedback -->
+  <div *ngIf="feedback" class="feedback-card">
+    <h2>AI Analysis Report</h2>
+    <div class="ai-content" [innerHTML]="formatFeedback(feedback.aiFeedback)"></div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!feedback && !loading" class="empty-state">
+    <p>Click "Generate AI Feedback" to get personalized insights</p>
+  </div>
+</div>

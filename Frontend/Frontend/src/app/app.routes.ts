@@ -13,6 +13,7 @@ import { ReviewsComponent } from './features/manager/reviews/reviews.component';
 import { EmployeesWorklogsComponent } from './features/employees/employees-worklogs/employees-worklogs.component';
 import { ProfileComponent } from './features/user/profile.component';
 import { PerformanceDashboardComponent } from './features/employees/employee-performance/employee-performance.component';
+import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.component';
 
 
 export const routes: Routes = [
@@ -47,7 +48,10 @@ export const routes: Routes = [
       },
       { path: 'admin-employes', component: AdminEmployesComponent },
       {path:'profile', component: ProfileComponent},
-      {path:'employee/performance', component: PerformanceDashboardComponent}
+      {path:'employee/performance', component: PerformanceDashboardComponent},
+      {
+        path:'employee/ai-feedback',component: AiFeedbackComponent
+      }
     ],
   },
 ];

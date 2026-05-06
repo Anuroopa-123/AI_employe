@@ -11,6 +11,7 @@ import adminRoutes from "./modules/routes/admin/admin.routes.js";
 import managerRoutes from "./modules/routes/manager/manager.routes.js";
 import worklogRoutes from "./modules/routes/worklogs/worklogs.routes.js";
 import performanceRoutes from "./modules/routes/performance/performance.routes.js";
+import chatbotRoutes from "./modules/routes/chatbot/chatbot.routes.js";
 
 const app = express();
 
@@ -62,6 +63,7 @@ app.use('/api/admin', adminRoutes);
 app.use("/api/manager", managerRoutes);
 app.use("/api/worklogs", worklogRoutes);
 app.use("/api/performance", performanceRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 app.use("/uploads", express.static("uploads"));
 /* ===========================
    HEALTH CHECK
