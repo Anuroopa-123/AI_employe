@@ -8,7 +8,7 @@ import {
   updateProfile
 } from "../../controller/organization/org.controller.js";
 
-
+import profileUpload from "../../../middleware/profile-upload.middleware.js";
 import { authMiddleware } from "../../../middleware/auth.middleware.js";
 
 const router = express.Router();
@@ -18,5 +18,9 @@ router.post("/add-employee", authMiddleware, addEmployee);
 router.post("/update-role", authMiddleware, updateRole);
 router.post("/toggle-status", authMiddleware, toggleUserStatus);
 router.get("/profile", authMiddleware, getProfile);
-router.put("/profile", authMiddleware, updateProfile);
+router.put("/profile", 
+  authMiddleware, 
+  profileUpload.single('profile_pic'),   
+  updateProfile
+);
 export default router;

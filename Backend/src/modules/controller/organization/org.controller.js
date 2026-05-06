@@ -115,12 +115,18 @@ export const getProfile = async (req, res) => {
 };
 
 // PROFILE - UPDATE
+// PROFILE - UPDATE
 export const updateProfile = async (req, res) => {
   try {
     const orgUserId = req.user.orgUserId;
+    
+    //  Correct path (employeepic folder)
+    const profilePicPath = req.file 
+      ? `/uploads/employeepic/${req.file.filename}` 
+      : null;
 
-    await updateProfileService(orgUserId, req.body);
-
+    await updateProfileService(orgUserId, req.body, profilePicPath);
+    
     res.json({ success: true, message: "Profile updated" });
   } catch (err) {
     console.error("UPDATE PROFILE ERROR:", err);

@@ -2,7 +2,7 @@ import pool from "../../../config/db.js";
 
 export const getProfileRepo = async (orgUserId) => {
   const [rows] = await pool.query(`
-    SELECT 
+    SELECT
       u.name,
       u.email,
       ou.id as org_user_id,
@@ -17,16 +17,25 @@ export const getProfileRepo = async (orgUserId) => {
     JOIN organization_users ou ON u.id = ou.user_id
     WHERE ou.id = ?
   `, [orgUserId]);
-
   return rows[0];
 };
 
-export const updateProfileRepo = async (orgUserId, data) => {
+export const updateProfileRepo = async (orgUserId, data, profilePicPath = null) => {
   const { phone, department, designation, skills, bio } = data;
 
-  await pool.query(`
-    UPDATE organization_users
+  let query = `
+    UPDATE organization_users 
     SET phone = ?, department = ?, designation = ?, skills = ?, bio = ?
-    WHERE id = ?
-  `, [phone, department, designation, skills, bio, orgUserId]);
+  `;
+  let params = [phone, department, designation, skills, bio];
+
+  if (profilePicPath) {
+    query += `, profile_pic = ?`;
+    params.push(profilePicPath);
+  }
+
+  query += ` WHERE id = ?`;
+  params.push(orgUserId);
+
+  await pool.query(query, params);
 };

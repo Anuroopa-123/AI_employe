@@ -16,60 +16,74 @@ export class ProfileComponent implements OnInit {
   profile: any = {};
   loading = true;
   showModal = false;
+  selectedFile: File | null = null;
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    private cdr: ChangeDetectorRef   // ← Added
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.loadProfile();
   }
 
+  getProfileImageUrl(): string {
+    if (!this.profile.profile_pic) return '';
+    return `http://localhost:5000${this.profile.profile_pic}`;
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onImageError(event: any) {
+    event.target.style.display = 'none';
+  }
+
   loadProfile() {
     this.loading = true;
-
-    this.http.get('http://localhost:5000/api/org/profile')
-      .subscribe({
-        next: (res: any) => {
-          console.log("PROFILE LOADED:", res);
-          
-          this.profile = res || {};
-          this.loading = false;
-          this.cdr.detectChanges();        // ← Force update
-        },
-        error: (err) => {
-          console.error("Profile load error", err);
-          this.loading = false;
-          this.cdr.detectChanges();
-        }
-      });
-  }
-
-  openModal() {
-    this.showModal = true;
-  }
-
-  closeModal() {
-    this.showModal = false;
+    this.http.get('http://localhost:5000/api/org/profile').subscribe({
+      next: (res: any) => {
+        this.profile = res || {};
+        this.loading = false;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   updateProfile() {
-    this.http.put('http://localhost:5000/api/org/profile', this.profile)
+    const formData = new FormData();
+
+    Object.keys(this.profile).forEach(key => {
+      if (this.profile[key] !== null && this.profile[key] !== undefined) {
+        formData.append(key, this.profile[key]);
+      }
+    });
+
+    if (this.selectedFile) {
+      formData.append('profile_pic', this.selectedFile);
+    }
+
+    this.http.put('http://localhost:5000/api/org/profile', formData)
       .subscribe({
         next: () => {
           this.toastr.success("Profile updated successfully");
           this.closeModal();
-          this.cdr.detectChanges();        // ← Fix NG0100 error
-          
-          // Optional: Refresh profile after update
-          setTimeout(() => this.loadProfile(), 500);
+          this.selectedFile = null;
+          setTimeout(() => this.loadProfile(), 600);
         },
         error: (err) => {
-          this.toastr.error("Failed to update profile");
           console.error(err);
+          this.toastr.error("Failed to update profile");
         }
       });
   }
+
+  openModal() { this.showModal = true; }
+  closeModal() { this.showModal = false; }
 }
