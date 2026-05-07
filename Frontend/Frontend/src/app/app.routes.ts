@@ -14,6 +14,7 @@ import { EmployeesWorklogsComponent } from './features/employees/employees-workl
 import { ProfileComponent } from './features/user/profile.component';
 import { PerformanceDashboardComponent } from './features/employees/employee-performance/employee-performance.component';
 import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.component';
+import { AiChatComponent } from './features/employees/ai-chat/ai-chat.component';
 
 
 export const routes: Routes = [
@@ -51,6 +52,9 @@ export const routes: Routes = [
       {path:'employee/performance', component: PerformanceDashboardComponent},
       {
         path:'employee/ai-feedback',component: AiFeedbackComponent
+      },
+      {
+        path:'employee/ai-chat',component: AiChatComponent
       }
     ],
   },

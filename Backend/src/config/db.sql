@@ -259,3 +259,17 @@ CREATE TABLE IF NOT EXISTS user_sessions (
 
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+CREATE TABLE IF NOT EXISTS ai_chat_history (
+
+  id INT PRIMARY KEY AUTO_INCREMENT,
+
+  employee_id INT,
+
+  role VARCHAR(20),
+
+  message TEXT,
+
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
