@@ -1,0 +1,40 @@
+<div class="chat-container">
+
+  <div class="chat-header">
+    🤖 Employee AI Assistant
+  </div>
+
+  <div class="chat-body">
+
+    <div
+      *ngFor="let msg of messages"
+      [ngClass]="msg.role">
+
+      <div class="message">
+        {{ msg.content }}
+      </div>
+
+    </div>
+
+    <div *ngIf="loading" class="bot">
+      <div class="message">
+        Thinking...
+      </div>
+    </div>
+
+  </div>
+
+  <div class="chat-input">
+
+    <input
+      [(ngModel)]="question"
+      placeholder="Ask something..."
+      (keyup.enter)="sendMessage()">
+
+    <button (click)="sendMessage()">
+      Send
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,434 @@
+[33mWARNING[0m:  [07-05-2026 12:37:00] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 12:37:01] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component System
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 12:37:01] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 12:37:01] Started server process [[36m18380[0m]
+[32mINFO[0m:     [07-05-2026 12:37:01] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 12:37:01] Application startup complete.
+[32mINFO[0m:     [07-05-2026 12:37:01] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 12:37:36] ::1:57273 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 12:39:02] Shutting down
+[32mINFO[0m:     [07-05-2026 12:39:02] Waiting for application shutdown.
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 12:39:02] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [07-05-2026 12:39:02] Application shutdown complete.
+[32mINFO[0m:     [07-05-2026 12:39:02] Finished server process [[36m18380[0m]
+[33mWARNING[0m:  [07-05-2026 12:39:31] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 12:39:31] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component System
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 12:39:31] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 12:39:31] Started server process [[36m5588[0m]
+[32mINFO[0m:     [07-05-2026 12:39:31] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 12:39:31] Application startup complete.
+[32mINFO[0m:     [07-05-2026 12:39:31] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 12:39:56] ::1:57392 - "GET /api/v1/heartbeat HTTP/1.1" 200
+[32mINFO[0m:     [07-05-2026 12:39:56] ::1:57392 - "GET /favicon.ico HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 12:41:53] ::1:57507 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 12:46:32] Shutting down
+[32mINFO[0m:     [07-05-2026 12:46:32] Finished server process [[36m5588[0m]
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 12:46:32] Stopping component OpenTelemetryClient
+[31mERROR[0m:    [07-05-2026 12:46:32] Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 68, in serve
+    with self.capture_signals():
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 328, in capture_signals
+    signal.raise_signal(captured_signal)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\starlette\routing.py", line 743, in lifespan
+    await receive()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\queues.py", line 159, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+[33mWARNING[0m:  [07-05-2026 13:28:39] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 13:28:39] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component System
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 13:28:39] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 13:28:39] Started server process [[36m12752[0m]
+[32mINFO[0m:     [07-05-2026 13:28:39] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 13:28:39] Application startup complete.
+[32mINFO[0m:     [07-05-2026 13:28:39] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 13:39:28] ::1:59422 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 13:39:45] Shutting down
+[32mINFO[0m:     [07-05-2026 13:39:46] Waiting for application shutdown.
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 13:39:46] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [07-05-2026 13:39:46] Application shutdown complete.
+[32mINFO[0m:     [07-05-2026 13:39:46] Finished server process [[36m12752[0m]
+[33mWARNING[0m:  [07-05-2026 13:39:48] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 13:39:48] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component System
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 13:39:48] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 13:39:48] Started server process [[36m18144[0m]
+[32mINFO[0m:     [07-05-2026 13:39:48] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 13:39:48] Application startup complete.
+[32mINFO[0m:     [07-05-2026 13:39:48] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 14:42:49] ::1:60698 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 14:51:23] Shutting down
+[32mINFO[0m:     [07-05-2026 14:51:23] Finished server process [[36m18144[0m]
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 14:51:23] Stopping component OpenTelemetryClient
+[31mERROR[0m:    [07-05-2026 14:51:23] Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 68, in serve
+    with self.capture_signals():
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 328, in capture_signals
+    signal.raise_signal(captured_signal)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\starlette\routing.py", line 743, in lifespan
+    await receive()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\queues.py", line 159, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+[33mWARNING[0m:  [07-05-2026 14:51:27] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 14:51:27] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component System
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 14:51:27] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 14:51:27] Started server process [[36m18108[0m]
+[32mINFO[0m:     [07-05-2026 14:51:27] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 14:51:27] Application startup complete.
+[32mINFO[0m:     [07-05-2026 14:51:27] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 14:52:07] Shutting down
+[32mINFO[0m:     [07-05-2026 14:52:07] Finished server process [[36m18108[0m]
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 14:52:07] Stopping component OpenTelemetryClient
+[31mERROR[0m:    [07-05-2026 14:52:07] Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 68, in serve
+    with self.capture_signals():
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 328, in capture_signals
+    signal.raise_signal(captured_signal)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\starlette\routing.py", line 743, in lifespan
+    await receive()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\queues.py", line 159, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+[33mWARNING[0m:  [07-05-2026 14:52:10] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 14:52:10] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component System
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 14:52:10] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 14:52:10] Started server process [[36m4288[0m]
+[32mINFO[0m:     [07-05-2026 14:52:10] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 14:52:10] Application startup complete.
+[32mINFO[0m:     [07-05-2026 14:52:10] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 15:56:57] Shutting down
+[32mINFO[0m:     [07-05-2026 15:56:57] Finished server process [[36m4288[0m]
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 15:56:57] Stopping component OpenTelemetryClient
+[31mERROR[0m:    [07-05-2026 15:56:57] Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 68, in serve
+    with self.capture_signals():
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 328, in capture_signals
+    signal.raise_signal(captured_signal)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\starlette\routing.py", line 743, in lifespan
+    await receive()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\queues.py", line 159, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+[33mWARNING[0m:  [07-05-2026 15:57:00] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 15:57:00] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component System
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 15:57:00] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 15:57:00] Started server process [[36m10672[0m]
+[32mINFO[0m:     [07-05-2026 15:57:00] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 15:57:00] Application startup complete.
+[32mINFO[0m:     [07-05-2026 15:57:00] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 16:02:04] ::1:64680 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 16:05:37] Shutting down
+[32mINFO[0m:     [07-05-2026 16:05:37] Waiting for application shutdown.
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:05:37] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [07-05-2026 16:05:37] Application shutdown complete.
+[32mINFO[0m:     [07-05-2026 16:05:37] Finished server process [[36m10672[0m]
+[33mWARNING[0m:  [07-05-2026 16:05:40] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 16:05:41] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component System
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:05:41] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 16:05:41] Started server process [[36m17548[0m]
+[32mINFO[0m:     [07-05-2026 16:05:41] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 16:05:41] Application startup complete.
+[32mINFO[0m:     [07-05-2026 16:05:41] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 16:06:23] ::1:64877 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 16:07:40] Shutting down
+[32mINFO[0m:     [07-05-2026 16:07:40] Finished server process [[36m17548[0m]
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:07:40] Stopping component OpenTelemetryClient
+[31mERROR[0m:    [07-05-2026 16:07:40] Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 603, in run_forever
+    self._run_once()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1909, in _run_once
+    handle._run()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 68, in serve
+    with self.capture_signals():
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\contextlib.py", line 142, in __exit__
+    next(self.gen)
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\server.py", line 328, in capture_signals
+    signal.raise_signal(captured_signal)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\starlette\routing.py", line 743, in lifespan
+    await receive()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+  File "C:\Users\sysadmin\AppData\Local\Programs\Python\Python310\lib\asyncio\queues.py", line 159, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+[33mWARNING[0m:  [07-05-2026 16:07:43] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 16:07:43] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component System
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:07:43] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 16:07:43] Started server process [[36m19276[0m]
+[32mINFO[0m:     [07-05-2026 16:07:43] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 16:07:43] Application startup complete.
+[32mINFO[0m:     [07-05-2026 16:07:43] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 16:08:18] ::1:64980 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404
+[32mINFO[0m:     [07-05-2026 16:10:17] Shutting down
+[32mINFO[0m:     [07-05-2026 16:10:17] Waiting for application shutdown.
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:10:17] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [07-05-2026 16:10:17] Application shutdown complete.
+[32mINFO[0m:     [07-05-2026 16:10:17] Finished server process [[36m19276[0m]
+[33mWARNING[0m:  [07-05-2026 16:10:20] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 16:10:20] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component System
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:10:20] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 16:10:20] Started server process [[36m19008[0m]
+[32mINFO[0m:     [07-05-2026 16:10:20] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 16:10:20] Application startup complete.
+[32mINFO[0m:     [07-05-2026 16:10:20] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 16:32:31] Shutting down
+[32mINFO[0m:     [07-05-2026 16:32:31] Waiting for application shutdown.
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component System
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component SegmentAPI
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:32:31] Stopping component OpenTelemetryClient
+[32mINFO[0m:     [07-05-2026 16:32:31] Application shutdown complete.
+[32mINFO[0m:     [07-05-2026 16:32:31] Finished server process [[36m19008[0m]
+[33mWARNING[0m:  [07-05-2026 16:32:33] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [07-05-2026 16:32:33] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component System
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component SimpleAssignmentPolicy
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component SqliteDB
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component Posthog
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [07-05-2026 16:32:33] Starting component SegmentAPI
+[32mINFO[0m:     [07-05-2026 16:32:33] Started server process [[36m17856[0m]
+[32mINFO[0m:     [07-05-2026 16:32:33] Waiting for application startup.
+[32mINFO[0m:     [07-05-2026 16:32:34] Application startup complete.
+[32mINFO[0m:     [07-05-2026 16:32:34] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [07-05-2026 16:32:56] ::1:50082 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 404

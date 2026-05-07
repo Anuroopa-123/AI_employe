@@ -116,12 +116,21 @@
     <input type="number" [(ngModel)]="task.hours" placeholder="Hours">
   </div>
 
+<div class="action-buttons">
+
   <button class="submit-btn"
           (click)="submitWork(task)"
           [disabled]="task.uploading || task.completion_status === 'approved'">
-    {{ task.uploading ? 'Uploading...' : 'Submit' }}
+    {{ task.uploading ? 'Uploading...' : 'Submit Work' }}
   </button>
 
+  <button class="complete-btn"
+          *ngIf="task.status !== 'completed'"
+          (click)="markComplete(task.id)">
+    ✅ Mark Complete
+  </button>
+
+</div>
 </ng-template>
 
 

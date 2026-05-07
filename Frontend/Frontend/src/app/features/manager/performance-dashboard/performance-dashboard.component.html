@@ -1,0 +1,87 @@
+<div class="performance-page">
+
+  <div class="top-section">
+
+    <div>
+      <h1>Performance Dashboard</h1>
+      <p class="subtitle">
+        AI-powered employee performance analytics
+      </p>
+    </div>
+
+    <div class="score-box" *ngIf="metrics">
+      <h2>{{ metrics.finalScore }}</h2>
+      <span>
+        {{ getPerformanceLabel(metrics.finalScore) }}
+      </span>
+    </div>
+
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="!metrics" class="loading">
+    Loading performance metrics...
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards" *ngIf="metrics">
+
+    <!-- PRODUCTIVITY -->
+    <div class="card">
+      <h3>Productivity</h3>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="metrics.productivityScore">
+        </div>
+      </div>
+
+      <p>{{ metrics.productivityScore }}%</p>
+    </div>
+
+    <!-- CONSISTENCY -->
+    <div class="card">
+      <h3>Consistency</h3>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="metrics.consistencyScore">
+        </div>
+      </div>
+
+      <p>{{ metrics.consistencyScore }}%</p>
+    </div>
+
+    <!-- DEADLINE -->
+    <div class="card">
+      <h3>Deadline Management</h3>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="metrics.deadlineScore">
+        </div>
+      </div>
+
+      <p>{{ metrics.deadlineScore }}%</p>
+    </div>
+
+    <!-- MANAGER -->
+    <div class="card">
+      <h3>Manager Rating</h3>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="metrics.managerRatingAvg">
+        </div>
+      </div>
+
+      <p>{{ metrics.managerRatingAvg }}%</p>
+    </div>
+
+  </div>
+
+</div>

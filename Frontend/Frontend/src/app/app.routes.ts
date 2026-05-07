@@ -12,6 +12,10 @@ import { ManagerDashboardComponent } from './features/manager/manager-dashboard/
 import { ReviewsComponent } from './features/manager/reviews/reviews.component';
 import { EmployeesWorklogsComponent } from './features/employees/employees-worklogs/employees-worklogs.component';
 import { ProfileComponent } from './features/user/profile.component';
+import { PerformanceDashboardComponent } from './features/employees/employee-performance/employee-performance.component';
+import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.component';
+import { AiChatComponent } from './features/employees/ai-chat/ai-chat.component';
+import { KnowledgeUploadComponent } from './features/admin/knowledge-upload/knowledge-upload.component';
 
 
 export const routes: Routes = [
@@ -23,6 +27,11 @@ export const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       { path: 'admin', component: AdminDashboardComponent },
+      {
+        path: 'admin/knowledge-upload',
+        component: KnowledgeUploadComponent
+
+      },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manager', component: ManagerDashboardComponent },
       {
@@ -45,7 +54,14 @@ export const routes: Routes = [
         component: EmployeesWorklogsComponent,
       },
       { path: 'admin-employes', component: AdminEmployesComponent },
-      {path:'profile', component: ProfileComponent}
+      {path:'profile', component: ProfileComponent},
+      {path:'employee/performance', component: PerformanceDashboardComponent},
+      {
+        path:'employee/ai-feedback',component: AiFeedbackComponent
+      },
+      {
+        path:'employee/ai-chat',component: AiChatComponent
+      }
     ],
   },
 ];

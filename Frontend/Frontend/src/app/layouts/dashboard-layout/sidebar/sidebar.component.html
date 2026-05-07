@@ -24,7 +24,16 @@
       <a (click)="navigate('/admin/roles')" class="nav-item">
         <span class="icon">🔑</span>
         <span>Roles & Permissions</span>
-      </a>
+        </a>
+        
+        <a (click)="navigate('/admin/knowledge-upload')" class="nav-item">
+        
+          <span class="icon">🧠</span>
+          <span>AI Knowledge</span>
+        
+        </a>
+
+
     </ng-container>
 
     <!-- MANAGER -->
@@ -45,6 +54,10 @@
         <span class="icon">⭐</span>
         <span>Reviews</span>
       </a>
+      <a (click)="navigate('/manager/performance')" class="nav-item">
+  <span class="icon">📈</span>
+  <span>Performance</span>
+</a>
     </ng-container>
 
     <!-- EMPLOYEE -->
@@ -61,6 +74,19 @@
         <span class="icon">⏱️</span>
         <span>Work Logs</span>
       </a>
+        <a (click)="navigate('/employee/performance')" class="nav-item">
+    <span class="icon">📈</span>
+    <span>My Performance</span>
+  </a>
+  <a (click)="navigate('/employee/ai-feedback')" class="nav-item">
+  <span class="icon">🤖</span>
+  <span>AI Insights</span>
+</a>
+<a (click)="navigate('/employee/ai-chat')" class="nav-item">
+  <span class="icon">💬</span>
+  <span>AI Assistant</span>
+</a>
+
     </ng-container>
   </div>
 
