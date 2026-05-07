@@ -25,8 +25,10 @@
     "langchain": "^1.4.0",
     "multer": "^2.1.1",
     "mysql2": "^3.22.3",
-    "pdf-parse": "^2.4.5",
-    "sequelize": "^6.37.8"
+    "pdf2pic": "^3.2.0",
+    "pdfjs-dist": "^5.7.284",
+    "sequelize": "^6.37.8",
+    "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

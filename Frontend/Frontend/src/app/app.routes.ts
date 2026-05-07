@@ -15,6 +15,7 @@ import { ProfileComponent } from './features/user/profile.component';
 import { PerformanceDashboardComponent } from './features/employees/employee-performance/employee-performance.component';
 import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.component';
 import { AiChatComponent } from './features/employees/ai-chat/ai-chat.component';
+import { KnowledgeUploadComponent } from './features/admin/knowledge-upload/knowledge-upload.component';
 
 
 export const routes: Routes = [
@@ -26,6 +27,11 @@ export const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       { path: 'admin', component: AdminDashboardComponent },
+      {
+        path: 'admin/knowledge-upload',
+        component: KnowledgeUploadComponent
+
+      },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'manager', component: ManagerDashboardComponent },
       {

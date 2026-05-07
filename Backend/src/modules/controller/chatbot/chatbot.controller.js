@@ -2,6 +2,10 @@ import {
   generateEmployeeFeedback,
   chatService
 } from "../../service/chatbot/chatbot.service.js";
+import {
+  processKnowledgePDF
+} from "../../service/chatbot/rag.service.js";
+
 
 export const generateAIFeedback = async (req, res) => {
 
@@ -34,6 +38,29 @@ export const chatWithAI = async (req, res) => {
     res.json(result);
 
   } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+
+};
+
+
+export const uploadKnowledgePDF =
+async (req, res) => {
+
+  try {
+
+    const result =
+      await processKnowledgePDF(req.file);
+
+    res.json(result);
+
+  } catch (err) {
+
+    console.log(err);
 
     res.status(500).json({
       message: err.message
