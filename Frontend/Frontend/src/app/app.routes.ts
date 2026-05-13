@@ -16,7 +16,7 @@ import { PerformanceDashboardComponent } from './features/employees/employee-per
 import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.component';
 import { AiChatComponent } from './features/employees/ai-chat/ai-chat.component';
 import { KnowledgeUploadComponent } from './features/admin/knowledge-upload/knowledge-upload.component';
-
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +25,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
+    canActivate: [authGuard],
     children: [
       { path: 'admin', component: AdminDashboardComponent },
       {

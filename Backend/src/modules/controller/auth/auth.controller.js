@@ -25,16 +25,55 @@ export const checkRegistration = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-export const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const data = await loginUser(email, password);
 
-    res.json({ success: true, ...data });
+export const login = async (req, res) => {
+
+  try {
+
+    const { email, password } =
+      req.body;
+
+    const data =
+      await loginUser(email, password,req);
+
+    res.json({
+      success: true,
+      ...data
+    });
+
   } catch (err) {
-    res.status(401).json({ success: false, message: err.message });
+
+    // SECURITY SESSION
+    if (
+      err.message ===
+      "SECURITY_ACTIVE_SESSION"
+    ) {
+
+      return res.status(403).json({
+
+        success: false,
+
+        security: true,
+
+        message:
+          "You are already logged in on another device or browser. Please logout from there first."
+
+      });
+
+    }
+
+    res.status(401).json({
+
+      success: false,
+
+      message: err.message
+
+    });
+
   }
+
 };
+
 
 export const logout = async (req, res) => {
   try {
@@ -47,7 +86,7 @@ export const logout = async (req, res) => {
     const token = authHeader.split(" ")[1];
 
     await pool.query(
-      "DELETE FROM user_sessions WHERE token = ?",
+     ` UPDATE user_sessions SET is_active = FALSE WHERE token = ? `,
       [token]
     );
 

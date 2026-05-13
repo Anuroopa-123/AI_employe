@@ -249,16 +249,31 @@ CREATE TABLE IF NOT EXISTS sales (
 );
 
 CREATE TABLE IF NOT EXISTS user_sessions (
+
   id INT AUTO_INCREMENT PRIMARY KEY,
+
   user_id INT,
+
   token VARCHAR(500),
+
   session_id VARCHAR(255),
+
   is_active BOOLEAN DEFAULT TRUE,
+
+  device_info TEXT,
+
+  ip_address VARCHAR(100),
+
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
   expires_at DATETIME,
 
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id)
+  REFERENCES users(id)
+
 );
+
+
 
 CREATE TABLE IF NOT EXISTS ai_chat_history (
 
