@@ -249,16 +249,31 @@ CREATE TABLE IF NOT EXISTS sales (
 );
 
 CREATE TABLE IF NOT EXISTS user_sessions (
+
   id INT AUTO_INCREMENT PRIMARY KEY,
+
   user_id INT,
+
   token VARCHAR(500),
+
   session_id VARCHAR(255),
+
   is_active BOOLEAN DEFAULT TRUE,
+
+  device_info TEXT,
+
+  ip_address VARCHAR(100),
+
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
   expires_at DATETIME,
 
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id)
+  REFERENCES users(id)
+
 );
+
+
 
 CREATE TABLE IF NOT EXISTS ai_chat_history (
 
@@ -271,5 +286,29 @@ CREATE TABLE IF NOT EXISTS ai_chat_history (
   message TEXT,
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+CREATE TABLE IF NOT EXISTS  employee_certificates (
+
+  id INT AUTO_INCREMENT PRIMARY KEY,
+
+  employee_id INT,
+
+  certificate_id VARCHAR(100) UNIQUE,
+
+  award_title VARCHAR(255),
+
+  issued_by_manager INT,
+
+  issue_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  verification_token VARCHAR(255),
+
+  certificate_url TEXT,
+
+  qr_code_url TEXT,
+
+  status VARCHAR(50) DEFAULT 'valid'
 
 );

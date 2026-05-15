@@ -47,72 +47,169 @@ export const registerUser = async (name, email, password) => {
 };
 
 // LOGIN
-export const loginUser = async (email, password) => {
 
-  const user = await findUserByEmail(email);
+// LOGIN
+export const loginUser = async (
+  email,
+  password,
+  req
+) => {
+
+  // FIND USER
+  const user =
+    await findUserByEmail(email);
 
   if (!user) {
     throw new Error("User not found");
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  // PASSWORD CHECK
+  const isMatch =
+    await bcrypt.compare(
+      password,
+      user.password
+    );
 
   if (!isMatch) {
     throw new Error("Invalid password");
   }
 
-  // ✅ GET ROLE + ORG USER ID
-const [roleRow] = await pool.query(
-  `SELECT 
-      r.name as role,
-      ou.id as org_user_id,
-      ou.organization_id,
-      ou.employee_code
-   FROM organization_users ou
-   JOIN roles r ON ou.role_id = r.id
-   WHERE ou.user_id = ?`,
-  [user.id]
-);
+  // CHECK ACTIVE SESSION
 
-user.role = roleRow[0]?.role || "Employee";
-user.org_user_id = roleRow[0]?.org_user_id;
-user.organization_id = roleRow[0]?.organization_id;
-user.employee_code = roleRow[0]?.employee_code;
 
-  // DELETE OLD SESSION
+// CHECK ACTIVE SESSION
+const [existingSession] =
   await pool.query(
-    "DELETE FROM user_sessions WHERE user_id = ?",
+
+    `
+    SELECT *
+    FROM user_sessions
+    WHERE user_id = ?
+    AND is_active = TRUE
+    AND expires_at > NOW()
+    LIMIT 1
+    `,
+
     [user.id]
   );
 
-  // TOKEN
+// BLOCK MULTIPLE LOGIN
+if (existingSession.length > 0) {
+
+  throw new Error(
+    "SECURITY_ACTIVE_SESSION"
+  );
+
+}
+
+
+
+
+
+  // GET ROLE
+  const [roleRow] =
+    await pool.query(
+
+      `
+      SELECT
+        r.name as role,
+        ou.id as org_user_id,
+        ou.organization_id,
+        ou.employee_code
+
+      FROM organization_users ou
+
+      JOIN roles r
+      ON ou.role_id = r.id
+
+      WHERE ou.user_id = ?
+      `,
+
+      [user.id]
+    );
+
+  user.role =
+    roleRow[0]?.role || "Employee";
+
+  user.org_user_id =
+    roleRow[0]?.org_user_id;
+
+  user.organization_id =
+    roleRow[0]?.organization_id;
+
+  user.employee_code =
+    roleRow[0]?.employee_code;
+
+  // CREATE TOKEN
   const token = jwt.sign(
+
     {
       id: user.id,
       email: user.email
     },
+
     process.env.JWT_SECRET,
-    { expiresIn: "1d" }
+
+    {
+      expiresIn: "1d"
+    }
+
   );
 
   const sessionId = uuidv4();
 
+  // DEVICE INFO
+  const deviceInfo =
+    req.headers['user-agent'];
+
+  // IP ADDRESS
+  const ipAddress =
+    req.ip ||
+    req.connection.remoteAddress;
+
   // SAVE SESSION
   await pool.query(
+
     `
     INSERT INTO user_sessions
-    (user_id, token, session_id, is_active, expires_at)
-    VALUES (?, ?, ?, TRUE, DATE_ADD(NOW(), INTERVAL 1 DAY))
+    (
+      user_id,
+      token,
+      session_id,
+      is_active,
+      device_info,
+      ip_address,
+      expires_at
+    )
+
+    VALUES
+    (
+      ?, ?, ?, TRUE,
+      ?, ?,
+      DATE_ADD(NOW(), INTERVAL 1 DAY)
+    )
     `,
-    [user.id, token, sessionId]
+
+    [
+      user.id,
+      token,
+      sessionId,
+      deviceInfo,
+      ipAddress
+    ]
+
   );
 
   // REMOVE PASSWORD
   delete user.password;
 
   return {
+
     token,
     user,
     sessionId
+
   };
+
 };
+

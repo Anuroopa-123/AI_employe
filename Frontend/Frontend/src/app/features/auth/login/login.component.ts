@@ -53,10 +53,29 @@ export class LoginComponent implements OnInit {   //  implement OnInit
           this.router.navigate(['/dashboard']);
         }
       },
-      error: (err) => {
-        this.loading = false;
-        this.error = err.error?.message || 'Invalid email or password';
-      }
+   
+error: (err) => {
+
+  this.loading = false;
+
+  console.log(err);
+
+  // SECURITY BLOCK
+  if (err.error?.security) {
+
+    this.error =
+      "This account is already active on another device/browser. Please logout there first.";
+
+    return;
+  }
+
+  this.error =
+    err.error?.message ||
+    'Invalid email or password';
+
+}
+
+
     });
   }
 }
