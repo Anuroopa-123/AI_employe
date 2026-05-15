@@ -288,3 +288,27 @@ CREATE TABLE IF NOT EXISTS ai_chat_history (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 );
+
+CREATE TABLE IF NOT EXISTS  employee_certificates (
+
+  id INT AUTO_INCREMENT PRIMARY KEY,
+
+  employee_id INT,
+
+  certificate_id VARCHAR(100) UNIQUE,
+
+  award_title VARCHAR(255),
+
+  issued_by_manager INT,
+
+  issue_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  verification_token VARCHAR(255),
+
+  certificate_url TEXT,
+
+  qr_code_url TEXT,
+
+  status VARCHAR(50) DEFAULT 'valid'
+
+);

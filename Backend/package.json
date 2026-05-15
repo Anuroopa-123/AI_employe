@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "^1.16.0",
     "bcrypt": "^6.0.0",
-    "chromadb": "^3.4.3",
+    "chromadb": "^1.8.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -27,8 +27,11 @@
     "mysql2": "^3.22.3",
     "pdf2pic": "^3.2.0",
     "pdfjs-dist": "^5.7.284",
+    "pdfkit": "^0.18.0",
+    "qrcode": "^1.5.4",
     "sequelize": "^6.37.8",
-    "tesseract.js": "^7.0.0"
+    "tesseract.js": "^7.0.0",
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
