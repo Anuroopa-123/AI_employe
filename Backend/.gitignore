@@ -4,18 +4,3 @@ dist/
 logs/
 
 .env
-
-# Chroma logs
-chroma.log
-
-# Chroma database
-chroma_data/
-
-# SQLite db
-*.sqlite3
-
-# uploads
-uploads/
-
-# env
-.env
