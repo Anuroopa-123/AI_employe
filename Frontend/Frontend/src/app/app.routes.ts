@@ -17,6 +17,7 @@ import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.componen
 import { AiChatComponent } from './features/employees/ai-chat/ai-chat.component';
 import { KnowledgeUploadComponent } from './features/admin/knowledge-upload/knowledge-upload.component';
 import { authGuard } from './core/guards/auth.guard';
+import { CertificateGeneratorComponent } from './features/admin/certificate-generator/certificate-generator.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -62,7 +63,10 @@ export const routes: Routes = [
       },
       {
         path:'employee/ai-chat',component: AiChatComponent
-      }
+      },
+    {
+      path:'admin/certificates',component: CertificateGeneratorComponent
+    }
     ],
   },
 ];

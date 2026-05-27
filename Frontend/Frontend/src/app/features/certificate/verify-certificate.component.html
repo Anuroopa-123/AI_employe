@@ -1,0 +1,88 @@
+<div class="verify-page">
+
+  <div
+    class="verify-card"
+    *ngIf="!loading">
+
+    <div *ngIf="valid">
+
+      <div class="success-icon">
+        ✔
+      </div>
+
+      <h1>
+        Certificate Verified
+      </h1>
+
+      <p>
+        This certificate is valid.
+      </p>
+
+      <div class="details">
+
+        <p>
+          <strong>
+            Employee:
+          </strong>
+
+          {{ certificate.name }}
+        </p>
+
+        <p>
+          <strong>
+            Award:
+          </strong>
+
+          {{ certificate.award_title }}
+        </p>
+
+        <p>
+          <strong>
+            Certificate ID:
+          </strong>
+
+          {{ certificate.certificate_id }}
+        </p>
+
+        <p>
+          <strong>
+            Status:
+          </strong>
+
+          {{ certificate.status }}
+        </p>
+
+      </div>
+
+      <a
+        [href]="
+        'http://localhost:5000/' +
+        certificate.certificate_url
+        "
+        target="_blank">
+
+        Download Certificate
+
+      </a>
+
+    </div>
+
+    <div *ngIf="!valid">
+
+      <div class="invalid-icon">
+        ✖
+      </div>
+
+      <h1>
+        Invalid Certificate
+      </h1>
+
+      <p>
+        This certificate could not be verified.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
