@@ -1273,3 +1273,18 @@ asyncio.exceptions.CancelledError
 [32mINFO[0m:     [15-05-2026 14:59:25] ::1:52516 - "POST /api/v1/collections/30e9419a-1d94-41e2-b6a9-5e3a5c96987a/add HTTP/1.1" 201
 [32mINFO[0m:     [15-05-2026 14:59:25] ::1:52516 - "POST /api/v1/collections/30e9419a-1d94-41e2-b6a9-5e3a5c96987a/add HTTP/1.1" 201
 [32mINFO[0m:     [15-05-2026 14:59:26] ::1:52516 - "POST /api/v1/collections/30e9419a-1d94-41e2-b6a9-5e3a5c96987a/add HTTP/1.1" 201
+[32mINFO[0m:     [15-05-2026 14:59:26] ::1:52516 - "POST /api/v1/collections/30e9419a-1d94-41e2-b6a9-5e3a5c96987a/add HTTP/1.1" 201
+[33mWARNING[0m:  [15-05-2026 16:10:42] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [15-05-2026 16:10:42] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component System
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component SqliteDB
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component Posthog
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [15-05-2026 16:10:42] Starting component SegmentAPI
+[31mERROR[0m:    [15-05-2026 16:10:42] Failed to send telemetry event ServerStartEvent: capture() takes 1 positional argument but 3 were given
+[32mINFO[0m:     [15-05-2026 16:10:42] Started server process [[36m7520[0m]
+[32mINFO[0m:     [15-05-2026 16:10:42] Waiting for application startup.
+[32mINFO[0m:     [15-05-2026 16:10:42] Application startup complete.
+[32mINFO[0m:     [15-05-2026 16:10:42] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
