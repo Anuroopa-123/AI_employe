@@ -3,7 +3,9 @@ import express from "express";
 import {
 
   createCertificate,
-  verifyCertificateController
+  verifyCertificateController,
+    getEligibleEmployees,
+     getEmployeeCertificates
 
 } from "../../controller/certificate/certificate.controller.js";
 
@@ -31,5 +33,20 @@ router.get(
 
   verifyCertificateController
 );
+router.get(
+  "/eligible-employees",
+  authMiddleware,
+  getEligibleEmployees
+);
+router.get(
+
+  "/employee/:employeeId",
+
+  authMiddleware,
+
+  getEmployeeCertificates
+
+);
+
 
 export default router;

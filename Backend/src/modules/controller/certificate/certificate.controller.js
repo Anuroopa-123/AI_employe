@@ -9,6 +9,14 @@ import {
   verifyCertificate
 
 } from "../../service/certificates/verify.service.js";
+import {
+  getEligibleEmployeesService
+} from "../../service/certificates/eligible.service.js";
+
+import {
+  getEmployeeCertificatesService
+} from "../../service/certificates/employee-certificates.service.js";
+
 
 export const createCertificate =
 async (req, res) => {
@@ -53,6 +61,52 @@ async (req, res) => {
       );
 
     res.json(result);
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+
+};
+
+export const getEligibleEmployees =
+async (req, res) => {
+
+  try {
+
+    const result =
+      await getEligibleEmployeesService();
+
+    res.json({
+      employees: result
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+
+};
+
+export const getEmployeeCertificates =
+async (req, res) => {
+
+  try {
+
+    const result =
+      await getEmployeeCertificatesService(
+        req.params.employeeId
+      );
+
+    res.json({
+      certificates: result
+    });
 
   } catch (err) {
 

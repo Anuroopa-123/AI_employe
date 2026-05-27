@@ -19,6 +19,12 @@ import {
 
 import {
 
+  HttpClientModule
+
+} from '@angular/common/http';
+
+import {
+
   CertificateService
 
 } from '../../services/certificate.service';
@@ -31,7 +37,8 @@ import {
   standalone: true,
 
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
 
   templateUrl:
@@ -51,6 +58,8 @@ implements OnInit {
   valid = false;
 
   loading = true;
+
+  certificateDownloadUrl = '';
 
   constructor(
 
@@ -82,6 +91,15 @@ implements OnInit {
 
           this.certificate =
             res.certificate;
+
+          if (
+            this.certificate
+          ) {
+
+            this.certificateDownloadUrl =
+              `http://localhost:5000/${this.certificate.certificate_url}`;
+
+          }
 
           this.loading =
             false;
