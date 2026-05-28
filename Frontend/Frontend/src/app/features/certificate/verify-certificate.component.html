@@ -2,8 +2,10 @@
 
   <div
     class="verify-card"
-    *ngIf="!loading">
+    *ngIf="!loading"
+  >
 
+    <!-- VALID -->
     <div *ngIf="valid">
 
       <div class="success-icon">
@@ -21,49 +23,42 @@
       <div class="details">
 
         <p>
-          <strong>
-            Employee:
-          </strong>
+          <strong>Employee:</strong>
 
-          {{ certificate.name }}
+          {{ certificate?.name }}
         </p>
 
         <p>
-          <strong>
-            Award:
-          </strong>
+          <strong>Award:</strong>
 
-          {{ certificate.award_title }}
+          {{ certificate?.award_title }}
         </p>
 
         <p>
-          <strong>
-            Certificate ID:
-          </strong>
+          <strong>Certificate ID:</strong>
 
-          {{ certificate.certificate_id }}
+          {{ certificate?.certificate_id }}
         </p>
 
         <p>
-          <strong>
-            Status:
-          </strong>
+          <strong>Status:</strong>
 
-          {{ certificate.status }}
+          {{ certificate?.status }}
         </p>
 
       </div>
 
       <a
-       [href]="certificateDownloadUrl"
-        target="_blank">
-
+        [href]="certificateDownloadUrl"
+        target="_blank"
+        class="download-btn"
+      >
         Download Certificate
-
       </a>
 
     </div>
 
+    <!-- INVALID -->
     <div *ngIf="!valid">
 
       <div class="invalid-icon">

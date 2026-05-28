@@ -26,6 +26,10 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+    {
+    path: 'verify-certificate/:token',
+    component: VerifyCertificateComponent
+  },
   {
     path: '',
     component: DashboardLayoutComponent,
@@ -82,10 +86,7 @@ export const routes: Routes = [
   path: 'employee/certificates',
   component: EmployeeCertificatesComponent
 },
-  {
-      path: 'verify-certificate/:token',
-      component: VerifyCertificateComponent
-    }
+
     ],
   },
 ];

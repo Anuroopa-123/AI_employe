@@ -57,7 +57,7 @@ implements OnInit {
 
   valid = false;
 
-  loading = true;
+  loading: boolean = true;
 
   certificateDownloadUrl = '';
 
