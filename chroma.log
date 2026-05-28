@@ -49,3 +49,17 @@
 [36mDEBUG[0m:    [15-05-2026 12:56:49] Stopping component OpenTelemetryClient
 [32mINFO[0m:     [15-05-2026 12:56:49] Application shutdown complete.
 [32mINFO[0m:     [15-05-2026 12:56:49] Finished server process [[36m24580[0m]
+[33mWARNING[0m:  [19-05-2026 10:47:09] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [19-05-2026 10:47:09] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component System
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component SqliteDB
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component QuotaEnforcer
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component Posthog
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [19-05-2026 10:47:09] Starting component SegmentAPI
+[31mERROR[0m:    [19-05-2026 10:47:09] Failed to send telemetry event ServerStartEvent: capture() takes 1 positional argument but 3 were given
+[32mINFO[0m:     [19-05-2026 10:47:09] Started server process [[36m25192[0m]
+[32mINFO[0m:     [19-05-2026 10:47:09] Waiting for application startup.
+[32mINFO[0m:     [19-05-2026 10:47:09] Application startup complete.
+[32mINFO[0m:     [19-05-2026 10:47:09] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)

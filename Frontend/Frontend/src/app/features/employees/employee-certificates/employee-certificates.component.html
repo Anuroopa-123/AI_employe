@@ -1,0 +1,59 @@
+<div class="certificate-page">
+
+  <div class="header">
+
+    <h1>🏆 My Certificates</h1>
+
+    <p>
+      Download and verify your achievements
+    </p>
+
+  </div>
+
+  <div
+    class="certificate-card"
+
+    *ngFor="let cert of certificates"
+  >
+
+    <div class="left">
+
+      <h2>
+        {{ cert.award_title }}
+      </h2>
+
+      <p>
+        Certificate ID:
+        {{ cert.certificate_id }}
+      </p>
+
+      <p>
+        Issued:
+        {{ cert.issue_date | date }}
+      </p>
+
+      <span class="status">
+        {{ cert.status }}
+      </span>
+
+    </div>
+
+    <div class="actions">
+
+      <button
+        (click)="downloadCertificate(cert)"
+      >
+        📥 Download
+      </button>
+
+      <button
+        (click)="verifyCertificate(cert)"
+      >
+        ✅ Verify
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

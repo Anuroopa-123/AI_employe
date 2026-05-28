@@ -17,11 +17,19 @@ import { AiFeedbackComponent } from './features/ai-feedback/ai-feedback.componen
 import { AiChatComponent } from './features/employees/ai-chat/ai-chat.component';
 import { KnowledgeUploadComponent } from './features/admin/knowledge-upload/knowledge-upload.component';
 import { authGuard } from './core/guards/auth.guard';
+import { CertificateGeneratorComponent } from './features/admin/certificate-generator/certificate-generator.component';
+import { ManagerCertificatesComponent } from './features/manager/manager-certificates/manager-certificates.component';
+import { EmployeeCertificatesComponent } from './features/employees/employee-certificates/employee-certificates.component';
+import { VerifyCertificateComponent } from './features/certificate/verify-certificate.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+    {
+    path: 'verify-certificate/:token',
+    component: VerifyCertificateComponent
+  },
   {
     path: '',
     component: DashboardLayoutComponent,
@@ -62,7 +70,23 @@ export const routes: Routes = [
       },
       {
         path:'employee/ai-chat',component: AiChatComponent
-      }
+      },
+    {
+      path:'admin/certificates',component: CertificateGeneratorComponent
+    },
+    {
+  path: 'manager/certificates',
+  component: ManagerCertificatesComponent
+},
+{
+  path: 'manager/performance',
+  component: PerformanceDashboardComponent
+},
+{
+  path: 'employee/certificates',
+  component: EmployeeCertificatesComponent
+},
+
     ],
   },
 ];

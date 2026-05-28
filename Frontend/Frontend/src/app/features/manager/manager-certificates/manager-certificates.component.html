@@ -1,0 +1,161 @@
+<div class="certificate-page">
+
+  <div class="header">
+
+    <h1>🏆 Employee Recognition Center</h1>
+
+    <p>
+      Generate AI-powered recognition certificates
+    </p>
+
+  </div>
+
+  <div class="table-card">
+
+    <!-- EMPTY -->
+    <div
+      *ngIf="employees.length === 0"
+      class="empty-state"
+    >
+
+      No eligible employees found
+
+    </div>
+
+    <!-- TABLE -->
+    <table *ngIf="employees.length > 0">
+
+      <thead>
+
+        <tr>
+
+          <th>Employee</th>
+
+          <th>Score</th>
+
+          <th>Rating</th>
+
+          <th>Eligible</th>
+
+          <th>Certificate Type</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let emp of employees">
+
+          <!-- NAME -->
+          <td>
+
+            {{ emp.name }}
+
+          </td>
+
+          <!-- SCORE -->
+          <td>
+
+            {{ emp.finalScore }}%
+
+          </td>
+
+          <!-- RATING -->
+          <td>
+
+            {{ emp.rating }} ⭐
+
+          </td>
+
+          <!-- ELIGIBILITY -->
+          <td>
+
+            <span
+              *ngIf="emp.eligible == 1"
+              class="eligible"
+            >
+
+              ✅ Eligible
+
+            </span>
+
+            <span
+              *ngIf="emp.eligible == 0"
+              class="not-eligible"
+            >
+
+              ❌ Not Eligible
+
+            </span>
+
+          </td>
+
+          <!-- SELECT -->
+          <td>
+
+            <select
+              [(ngModel)]="emp.certificateType"
+            >
+
+              <option value="">
+                Select Award
+              </option>
+
+              <option value="Best Performer">
+                🏆 Best Performer
+              </option>
+
+              <option value="Leadership Award">
+                👑 Leadership Award
+              </option>
+
+              <option value="Consistency Champion">
+                ⏱ Consistency Champion
+              </option>
+
+              <option value="AI Excellence Award">
+                🤖 AI Excellence Award
+              </option>
+
+              <option value="Innovation Award">
+                💡 Innovation Award
+              </option>
+
+            </select>
+
+          </td>
+
+          <!-- BUTTON -->
+          <td>
+
+            <button
+
+              class="generate-btn"
+
+              [disabled]="
+                emp.eligible == 0 ||
+                !emp.certificateType
+              "
+
+              (click)="generateCertificate(emp)"
+
+            >
+
+              Generate
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

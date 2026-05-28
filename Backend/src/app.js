@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
-import testRoutes from "./modules/routes/test.routes.js";
 import rateLimit from "express-rate-limit";
 import authRoutes from "./modules/routes/auth/auth.routes.js";
 import orgRoutes from "./modules/routes/organization/org.routes.js";
@@ -12,6 +11,7 @@ import managerRoutes from "./modules/routes/manager/manager.routes.js";
 import worklogRoutes from "./modules/routes/worklogs/worklogs.routes.js";
 import performanceRoutes from "./modules/routes/performance/performance.routes.js";
 import chatbotRoutes from "./modules/routes/chatbot/chatbot.routes.js";
+import certificateRoutes from "./modules/routes/certificate/certificate.routes.js";
 
 const app = express();
 
@@ -55,7 +55,7 @@ app.use(cookieParser());
 /* ===========================
    ROUTES
 =========================== */
-app.use("/api", testRoutes);
+
 app.use("/api/auth", authRoutes);
 app.use("/api/org", orgRoutes);
 app.use("/api/tasks", taskRoutes);
@@ -64,6 +64,10 @@ app.use("/api/manager", managerRoutes);
 app.use("/api/worklogs", worklogRoutes);
 app.use("/api/performance", performanceRoutes);
 app.use("/api/chatbot", chatbotRoutes);
+app.use(
+  "/api/certificates",
+  certificateRoutes
+);
 app.use("/uploads", express.static("uploads"));
 /* ===========================
    HEALTH CHECK

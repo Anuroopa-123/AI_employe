@@ -1,0 +1,34 @@
+<div class="card">
+
+  <h2>Create Certificate</h2>
+
+  <input
+    [(ngModel)]="employeeId"
+    placeholder="Employee ID"
+  >
+
+  <input
+    [(ngModel)]="awardTitle"
+    placeholder="Award Title"
+  >
+
+  <button
+    (click)="generate()">
+
+    Generate Certificate
+
+  </button>
+
+  <div *ngIf="result">
+
+    <a
+      [href]="result.downloadUrl"
+      target="_blank">
+
+      Download Certificate
+
+    </a>
+
+  </div>
+
+</div>

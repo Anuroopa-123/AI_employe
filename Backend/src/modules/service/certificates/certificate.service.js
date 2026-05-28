@@ -40,8 +40,8 @@ export const generateCertificate = async (
     uuidv4();
 
   // VERIFY URL
-  const verifyUrl =
-    `http://localhost:4200/verify-certificate/${verificationToken}`;
+const verifyUrl =
+`http://localhost:4200/verify-certificate/${verificationToken}`;
 
   // QR IMAGE PATH
   const qrPath =
