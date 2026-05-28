@@ -2,7 +2,9 @@
 
   <div class="header">
 
-    <h1>🏆 My Certificates</h1>
+    <h1>
+      🏆 My Certificates
+    </h1>
 
     <p>
       Download and verify your achievements
@@ -10,6 +12,17 @@
 
   </div>
 
+  <!-- EMPTY -->
+  <div
+    *ngIf="certificates.length === 0"
+    class="empty-state"
+  >
+
+    No certificates found
+
+  </div>
+
+  <!-- LIST -->
   <div
     class="certificate-card"
 

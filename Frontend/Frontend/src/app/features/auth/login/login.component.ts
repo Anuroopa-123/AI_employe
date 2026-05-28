@@ -41,18 +41,49 @@ export class LoginComponent implements OnInit {   //  implement OnInit
     this.error = '';
 
     this.authService.login(this.email, this.password).subscribe({
-      next: (res: any) => {
-        this.loading = false;
-        sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('user', JSON.stringify(res.user));
-        sessionStorage.setItem('session_id', res.sessionId);
+    next: (res: any) => {
 
-        if (res.user.role === 'Admin') {
-          this.router.navigate(['/admin']);
-        } else {
-          this.router.navigate(['/dashboard']);
-        }
-      },
+  this.loading = false;
+
+  sessionStorage.setItem(
+    'token',
+    res.token
+  );
+
+  sessionStorage.setItem(
+    'user',
+    JSON.stringify(res.user)
+  );
+
+  sessionStorage.setItem(
+    'session_id',
+    res.sessionId
+  );
+
+  // ADMIN
+  if (res.user.role === 'Admin') {
+
+    this.router.navigate(['/admin']);
+
+  }
+
+  // MANAGER
+  else if (
+    res.user.role === 'Manager'
+  ) {
+
+    this.router.navigate(['/manager']);
+
+  }
+
+  // EMPLOYEE
+  else {
+
+    this.router.navigate(['/employee']);
+
+  }
+
+},
    
 error: (err) => {
 

@@ -1,22 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule
+} from '@angular/common';
 
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule
+} from '@angular/common/http';
 
 @Component({
 
-  selector: 'app-employee-certificates',
+  selector:
+    'app-employee-certificates',
 
   standalone: true,
 
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    HttpClientModule
+  ],
 
   templateUrl:
     './employee-certificates.component.html',
 
-  styleUrls:
-    ['./employee-certificates.component.css']
+  styleUrls: [
+    './employee-certificates.component.css'
+  ]
 
 })
 
@@ -25,11 +38,23 @@ implements OnInit {
 
   certificates: any[] = [];
 
+  user: any = null;
+
   constructor(
     private http: HttpClient
   ) {}
 
   ngOnInit() {
+
+    this.user =
+      JSON.parse(
+        sessionStorage.getItem('user') || '{}'
+      );
+
+    console.log(
+      'LOGGED USER:',
+      this.user
+    );
 
     this.loadCertificates();
 
@@ -37,14 +62,19 @@ implements OnInit {
 
   loadCertificates() {
 
-    const user =
-      JSON.parse(
-        sessionStorage.getItem('user') || '{}'
+    if (!this.user?.id) {
+
+      console.log(
+        'USER ID NOT FOUND'
       );
+
+      return;
+
+    }
 
     this.http.get(
 
-      `http://localhost:5000/api/certificates/employee/${user.id}`,
+      `http://localhost:5000/api/certificates/employee/${this.user.id}`,
 
       {
 
@@ -60,6 +90,11 @@ implements OnInit {
     ).subscribe({
 
       next: (res: any) => {
+
+        console.log(
+          'CERTIFICATES:',
+          res
+        );
 
         this.certificates =
           res.certificates || [];

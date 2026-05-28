@@ -112,15 +112,26 @@ CREATE TABLE IF NOT EXISTS reviews (
 );
 
 CREATE TABLE IF NOT EXISTS performance_metrics (
+
   id INT AUTO_INCREMENT PRIMARY KEY,
-  employee_id INT,
+
+  employee_id INT UNIQUE,
+
   productivity_score FLOAT,
+
   consistency_score FLOAT,
+
   deadline_score FLOAT,
+
   manager_rating_avg FLOAT,
+
   final_score FLOAT,
+
   calculated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (employee_id) REFERENCES organization_users(id)
+
+  FOREIGN KEY (employee_id)
+  REFERENCES organization_users(id)
+
 );
 
 CREATE TABLE IF NOT EXISTS ai_feedback (
