@@ -17,9 +17,16 @@ export const generateCertificate = async (
   const [employeeRows] = await pool.query(
 
     `
-    SELECT name,email
-    FROM users
-    WHERE id = ?
+   SELECT
+  u.name,
+  u.email
+
+FROM organization_users ou
+
+JOIN users u
+ON ou.user_id = u.id
+
+WHERE ou.id = ?
     `,
 
     [employeeId]

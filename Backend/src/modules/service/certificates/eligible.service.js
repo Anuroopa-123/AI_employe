@@ -3,56 +3,53 @@ import pool from "../../../config/db.js";
 export const getEligibleEmployeesService =
 async () => {
 
-const [rows] = await pool.query(`
+  const [rows] = await pool.query(`
 
-SELECT
+    SELECT
 
-  u.id as employeeId,
+      ou.id as employeeId,
 
-  u.name,
+      u.name,
 
-  ROUND(
-    COALESCE(pm.final_score, 0),
-    0
-  ) as finalScore,
+      ROUND(
+        COALESCE(pm.final_score, 0),
+        0
+      ) as finalScore,
 
-  COALESCE(
-    ROUND(AVG(r.rating)),
-    0
-  ) as rating,
+      COALESCE(
+        ROUND(AVG(r.rating)),
+        0
+      ) as rating,
 
-  CASE
+      CASE
+        WHEN COALESCE(pm.final_score,0) >= 80
+        THEN 1
+        ELSE 0
+      END as eligible
 
-    WHEN COALESCE(pm.final_score,0) >= 80
-    THEN 1
+    FROM organization_users ou
 
-    ELSE 0
+    JOIN users u
+    ON ou.user_id = u.id
 
-  END as eligible
+    JOIN roles ro
+    ON ro.id = ou.role_id
 
-FROM users u
+    LEFT JOIN performance_metrics pm
+    ON pm.employee_id = ou.id
 
-JOIN organization_users ou
-ON ou.user_id = u.id
+    LEFT JOIN reviews r
+    ON r.employee_id = ou.id
 
-JOIN roles ro
-ON ro.id = ou.role_id
+    WHERE ro.name = 'Employee'
 
-LEFT JOIN performance_metrics pm
-ON pm.employee_id = u.id
+    GROUP BY ou.id
 
-LEFT JOIN reviews r
-ON r.employee_id = u.id
+    HAVING finalScore > 0
 
-WHERE ro.name = 'Employee'
+    ORDER BY finalScore DESC
 
-GROUP BY u.id
-
-HAVING finalScore > 0
-
-ORDER BY finalScore DESC
-
-`);
+  `);
 
   return rows;
 

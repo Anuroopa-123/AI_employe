@@ -1,8 +1,19 @@
 <div class="verify-page">
 
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loading">
+    Loading certificate...
+  </div>
+
+  <!-- ERROR -->
+  <div *ngIf="error" class="error">
+    Failed to load certificate
+  </div>
+
+  <!-- CONTENT -->
   <div
     class="verify-card"
-    *ngIf="!loading"
+    *ngIf="!loading && !error"
   >
 
     <!-- VALID -->
@@ -24,26 +35,22 @@
 
         <p>
           <strong>Employee:</strong>
-
-          {{ certificate?.name }}
+          {{ certificate.name }}
         </p>
 
         <p>
           <strong>Award:</strong>
-
-          {{ certificate?.award_title }}
+          {{ certificate.award_title }}
         </p>
 
         <p>
           <strong>Certificate ID:</strong>
-
-          {{ certificate?.certificate_id }}
+          {{ certificate.certificate_id }}
         </p>
 
         <p>
           <strong>Status:</strong>
-
-          {{ certificate?.status }}
+          {{ certificate.status }}
         </p>
 
       </div>

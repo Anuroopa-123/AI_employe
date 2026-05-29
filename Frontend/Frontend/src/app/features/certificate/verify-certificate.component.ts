@@ -1,38 +1,15 @@
-import {
+import { Component, OnInit } from '@angular/core';
 
-  Component,
-  OnInit
+import { ActivatedRoute } from '@angular/router';
 
-} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {
+import { HttpClientModule } from '@angular/common/http';
 
-  ActivatedRoute
-
-} from '@angular/router';
-
-import {
-
-  CommonModule
-
-} from '@angular/common';
-
-import {
-
-  HttpClientModule
-
-} from '@angular/common/http';
-
-import {
-
-  CertificateService
-
-} from '../../services/certificate.service';
+import { CertificateService } from '../../services/certificate.service';
 
 @Component({
-
-  selector:
-    'app-verify-certificate',
+  selector: 'app-verify-certificate',
 
   standalone: true,
 
@@ -47,76 +24,71 @@ import {
   styleUrls: [
     './verify-certificate.component.css'
   ]
-
 })
 
 export class VerifyCertificateComponent
 implements OnInit {
 
-  certificate: any = null;
+  certificate: any = {};
 
   valid = false;
 
-  loading: boolean = true;
+  loading = true;
+
+  error = false;
 
   certificateDownloadUrl = '';
 
   constructor(
-
-    private route:
-    ActivatedRoute,
-
-    private certService:
-    CertificateService
-
+    private route: ActivatedRoute,
+    private certService: CertificateService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     const token =
-      this.route.snapshot
-      .paramMap
-      .get('token');
+      this.route.snapshot.paramMap.get('token');
 
-    if (token) {
+    console.log('TOKEN:', token);
 
-      this.certService
-      .verify(token)
+    if (!token) {
+
+      this.loading = false;
+
+      this.error = true;
+
+      return;
+    }
+
+    this.certService.verify(token)
       .subscribe({
 
         next: (res: any) => {
 
-          this.valid =
-            res.valid;
+          console.log('VERIFY RESPONSE:', res);
 
-          this.certificate =
-            res.certificate;
+          this.valid = res.valid;
 
-          if (
-            this.certificate
-          ) {
+          this.certificate = res.certificate || {};
+
+          if (this.certificate?.certificate_url) {
 
             this.certificateDownloadUrl =
               `http://localhost:5000/${this.certificate.certificate_url}`;
-
           }
 
-          this.loading =
-            false;
-
+          this.loading = false;
         },
 
-        error: () => {
+        error: (err) => {
 
-          this.loading =
-            false;
+          console.log(err);
 
+          this.loading = false;
+
+          this.error = true;
         }
 
       });
-
-    }
-
   }
-
 }

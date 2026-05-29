@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -40,8 +41,11 @@ implements OnInit {
 
   user: any = null;
 
+  loading = true;
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -57,24 +61,24 @@ implements OnInit {
     );
 
     this.loadCertificates();
-
   }
 
   loadCertificates() {
 
-    if (!this.user?.id) {
+    if (!this.user?.org_user_id) {
 
       console.log(
-        'USER ID NOT FOUND'
+        'ORG USER ID NOT FOUND'
       );
 
-      return;
+      this.loading = false;
 
+      return;
     }
 
     this.http.get(
 
-      `http://localhost:5000/api/certificates/employee/${this.user.id}`,
+      `http://localhost:5000/api/certificates/employee/${this.user.org_user_id}`,
 
       {
 
@@ -97,13 +101,18 @@ implements OnInit {
         );
 
         this.certificates =
-          res.certificates || [];
+          [...(res.certificates || [])];
 
+        this.loading = false;
+
+        this.cdRef.detectChanges();
       },
 
       error: (err) => {
 
         console.log(err);
+
+        this.loading = false;
 
       }
 

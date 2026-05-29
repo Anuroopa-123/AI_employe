@@ -12,20 +12,25 @@
 
   </div>
 
-  <!-- EMPTY -->
+  <!-- LOADING -->
   <div
-    *ngIf="certificates.length === 0"
+    *ngIf="loading"
     class="empty-state"
   >
+    Loading certificates...
+  </div>
 
+  <!-- EMPTY -->
+  <div
+    *ngIf="!loading && certificates.length === 0"
+    class="empty-state"
+  >
     No certificates found
-
   </div>
 
   <!-- LIST -->
   <div
     class="certificate-card"
-
     *ngFor="let cert of certificates"
   >
 
@@ -42,7 +47,7 @@
 
       <p>
         Issued:
-        {{ cert.issue_date | date }}
+        {{ cert.issue_date | date:'mediumDate' }}
       </p>
 
       <span class="status">

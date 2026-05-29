@@ -190,3 +190,77 @@ a {
   text-decoration: none;
 
 }
+.verify-page {
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f5f7fb;
+}
+
+.verify-card {
+
+  width: 500px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+  text-align: center;
+}
+
+.success-icon,
+.invalid-icon {
+
+  font-size: 60px;
+
+  margin-bottom: 20px;
+}
+
+.success-icon {
+  color: green;
+}
+
+.invalid-icon {
+  color: red;
+}
+
+.details {
+
+  margin: 20px 0;
+
+  text-align: left;
+}
+
+.download-btn {
+
+  display: inline-block;
+
+  margin-top: 20px;
+
+  padding: 12px 20px;
+
+  background: #2563eb;
+
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 8px;
+}
+
+.loading,
+.error {
+
+  font-size: 22px;
+
+  font-weight: bold;
+}
